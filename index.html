@@ -173,12 +173,15 @@
 <script>
     var authBar = document.getElementById('authBar');
     auth.onAuthStateChanged(function(user) {
-        if (user) {
-            var name = user.displayName || user.email;
-            authBar.innerHTML = '<span class="user-name">' + name + '</span> <button onclick="auth.signOut().then(function(){location.reload()})">Выйти</button>';
-        } else {
-            authBar.innerHTML = '<a class="btn-login" href="pages/login.html">Войти</a>';
+        if (!user) {
+            window.location.href = 'pages/login.html';
+            return;
         }
+        var name = user.displayName || user.email;
+        authBar.innerHTML = '<span class="user-name">' + name + '</span> <button id="logoutBtn">Выйти</button>';
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            auth.signOut().then(function() { window.location.href = 'pages/login.html'; });
+        });
     });
 </script>
 </body>
