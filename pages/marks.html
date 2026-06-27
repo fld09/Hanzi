@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HSK 3.0 — Все уровни</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            user-select: none;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background: #f1f5f9;
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 10px;
+        }
+        .app-container {
+            max-width: 1350px;
+            width: 100%;
+            background: white;
+            border-radius: 28px;
+            padding: 24px 20px 30px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+        }
+        .top-bar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 6px;
+        }
+        .back-btn {
+            text-decoration: none;
+            color: #475569;
+            font-size: 1.4rem;
+            transition: 0.15s;
+        }
+        .back-btn:hover {
+            color: #1e293b;
+        }
+        h1 {
+            font-weight: 500;
+            font-size: 1.7rem;
+            margin: 0 0 6px 0;
+            color: #1e293b;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .h1-sub {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #475569;
+            margin-left: auto;
+        }
+        .nav-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #e9edf2;
+            justify-content: center;
+        }
+        .nav-btn {
+            padding: 10px 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 40px;
+            background: white;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #475569;
+            transition: all 0.2s;
+            min-width: 70px;
+            text-align: center;
+        }
+        .nav-btn:hover {
+            background: #f1f5f9;
+            border-color: #94a3b8;
+            transform: translateY(-2px);
+        }
+        .nav-btn.active {
+            background: #1e293b;
+            border-color: #1e293b;
+            color: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .nav-btn .level-badge {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 10px;
+            margin-right: 6px;
+        }
+        .subtitle {
+            color: #475569;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            padding-left: 16px;
+            border-radius: 0 12px 12px 0;
+            line-height: 1.5;
+        }
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 24px;
+            background: #f1f5f9;
+            padding: 12px 18px;
+            border-radius: 60px;
+        }
+        .color-picker-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .color-picker-area label {
+            font-weight: 500;
+            color: #1e293b;
+        }
+        .voice-select {
+            padding: 6px 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            background: white;
+            color: #1e293b;
+            cursor: pointer;
+            max-width: 160px;
+        }
+        input[type="color"] {
+            width: 44px;
+            height: 44px;
+            border: 2px solid #cbd5e1;
+            border-radius: 40px;
+            background: white;
+            cursor: pointer;
+            padding: 2px;
+        }
+        input[type="color"]::-webkit-color-swatch-wrapper {
+            padding: 0;
+        }
+        input[type="color"]::-webkit-color-swatch {
+            border: none;
+            border-radius: 40px;
+        }
+        .stats {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            color: #1e293b;
+            font-size: 0.95rem;
+        }
+        .stats span {
+            background: white;
+            padding: 6px 16px;
+            border-radius: 30px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+        }
+        .btn-reset {
+            background: white;
+            border: 1px solid #e2e8f0;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-weight: 500;
+            cursor: pointer;
+            color: #1e293b;
+            transition: 0.15s;
+            font-size: 0.9rem;
+        }
+        .btn-reset:hover {
+            background: #f1f5f9;
+            border-color: #94a3b8;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+            gap: 8px;
+            margin-top: 6px;
+        }
+        .cell {
+            aspect-ratio: 1 / 1;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: #0f172a;
+            cursor: pointer;
+            transition: background 0.15s, box-shadow 0.1s, transform 0.1s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            padding: 0 2px;
+            word-break: break-all;
+            position: relative;
+        }
+        .cell .speaker {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            background: rgba(255,255,255,0.85);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+            opacity: 0;
+            transition: opacity 0.15s;
+        }
+        .cell:hover .speaker, .cell .speaker.playing {
+            opacity: 1;
+        }
+        .cell .speaker:active {
+            transform: scale(1.2);
+        }
+        .cell .speaker.playing {
+            color: #4f46e5;
+        }
+        .cell .trans-btn {
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            font-size: 0.7rem;
+            cursor: pointer;
+            background: rgba(255,255,255,0.85);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+            opacity: 0;
+            transition: opacity 0.15s;
+        }
+        .cell:hover .trans-btn, .cell .trans-btn:focus {
+            opacity: 1;
+        }
+        .cell .trans-btn:active {
+            transform: scale(1.2);
+        }
+        .touch .cell .speaker, .touch .cell .trans-btn {
+            opacity: 1;
+        }
+        .trans-popup {
+            position: fixed;
+            background: #1e293b;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            z-index: 1000;
+            max-width: 280px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .trans-popup.show {
+            opacity: 1;
+        }
+        .trans-popup .ch {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 2px;
+        }
+        .trans-popup .ru {
+            color: #cbd5e1;
+        }
+        .trans-popup .loading {
+            color: #94a3b8;
+            font-size: 0.8rem;
+        }
+        .cell:hover {
+            background: #f8fafc;
+            border-color: #94a3b8;
+            transform: scale(1.02);
+            z-index: 2;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+        }
+        .cell.colored {
+            border-color: #cbd5e1;
+        }
+        .footer-hint {
+            margin-top: 24px;
+            font-size: 0.9rem;
+            color: #64748b;
+            text-align: center;
+            border-top: 1px solid #e9edf2;
+            padding-top: 20px;
+        }
+        @media (max-width: 600px) {
+            .grid {
+                grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+                gap: 6px;
+            }
+            .cell {
+                font-size: 1.3rem;
+                border-radius: 12px;
+            }
+            .toolbar {
+                flex-direction: column;
+                align-items: stretch;
+                border-radius: 28px;
+                gap: 12px;
+            }
+            .stats {
+                justify-content: space-between;
+                flex-wrap: wrap;
+            }
+            .nav-btn {
+                padding: 8px 14px;
+                font-size: 0.8rem;
+                min-width: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="app-container">
+    <div class="top-bar">
+        <a class="back-btn" href="../index.html">←</a>
+        <h1>
+            <span>📚 HSK 3.0</span>
+            <span class="h1-sub">Все уровни · иероглифы</span>
+        </h1>
+    </div>
+
+    <nav class="nav-bar" id="navBar"></nav>
+
+    <div class="subtitle" id="subtitle"></div>
+
+    <div class="toolbar">
+        <div class="color-picker-area">
+            <label for="levelColor">🎨 Цвет уровня</label>
+            <input type="color" id="levelColor">
+            <select class="voice-select" id="voiceSelect"><option value="">Голос</option></select>
+        </div>
+        <div class="stats">
+            <span id="counter">Выучено: 0 / <span id="totalCells">0</span></span>
+            <button class="btn-reset" id="resetBtn">⟳ Сбросить всё</button>
+        </div>
+    </div>
+
+    <div class="grid" id="gridContainer"></div>
+    <div class="footer-hint">
+        ⚡ Клик — закрасить · 🔊 озвучить · 🌐 перевод
+    </div>
+</div>
+
+<audio id="ttsAudio" preload="auto" style="display:none"></audio>
+<div class="trans-popup" id="transPopup"></div>
+
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+<script src="../js/firebase-init.js"></script>
+<script src="../data/hsk-data.js"></script>
+<script>
+    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) document.body.classList.add('touch');
+    let currentLevel = '1';
+    let coloredState = {};
+    let currentColor = '#f97316';
+
+    const navBar = document.getElementById('navBar');
+    const subtitle = document.getElementById('subtitle');
+    const grid = document.getElementById('gridContainer');
+    const counterSpan = document.getElementById('counter');
+    const totalSpan = document.getElementById('totalCells');
+    const resetBtn = document.getElementById('resetBtn');
+    const colorPicker = document.getElementById('levelColor');
+    const voiceSelect = document.getElementById('voiceSelect');
+    voiceSelect.style.display = 'none';
+    let selectedVoice = null;
+
+    function populateVoices() {
+        const v = speechSynthesis.getVoices();
+        const cn = v.filter(function(x) { return x.lang.indexOf('zh') === 0; });
+        if (cn.length === 0) return;
+        voiceSelect.innerHTML = '<option value="">Голос</option>';
+        cn.forEach(function(x) {
+            const opt = document.createElement('option');
+            opt.value = x.voiceURI;
+            opt.textContent = x.name;
+            if (selectedVoice && x.voiceURI === selectedVoice) opt.selected = true;
+            voiceSelect.appendChild(opt);
+        });
+        voiceSelect.style.display = '';
+    }
+    if (window.speechSynthesis) {
+        speechSynthesis.getVoices();
+        if (speechSynthesis.addEventListener) speechSynthesis.addEventListener('voiceschanged', populateVoices);
+        voiceSelect.addEventListener('mousedown', function() {
+            var v = speechSynthesis.getVoices();
+            if (v.length > 0) populateVoices();
+        });
+    }
+    setTimeout(populateVoices, 1000);
+
+    function ensureState(level) {
+        if (!coloredState[level]) {
+            coloredState[level] = new Array(HSK_DATA[level].words.length).fill(false);
+        }
+    }
+
+    function ensureStateAll() {
+        Object.keys(HSK_DATA).forEach(function(id) {
+            if (!coloredState[id]) {
+                coloredState[id] = new Array(HSK_DATA[id].words.length).fill(false);
+            }
+        });
+    }
+
+    function loadState() {
+        var user = auth && auth.currentUser;
+        if (!user || !db) { window.location.href = 'login.html'; return; }
+
+        var cached = localStorage.getItem('hsk_marks');
+        if (cached) {
+            try { coloredState = JSON.parse(cached); } catch(e) {}
+            ensureStateAll();
+            colorPicker.value = currentColor;
+            updateNav();
+            render();
+            updateSubtitle();
+            updateCounter();
+        }
+
+        db.collection('users').doc(user.uid).get().then(function(doc) {
+            if (doc.exists && doc.data().marks) {
+                coloredState = doc.data().marks;
+                localStorage.setItem('hsk_marks', JSON.stringify(coloredState));
+            }
+            ensureStateAll();
+            colorPicker.value = currentColor;
+            updateNav();
+            render();
+            updateSubtitle();
+            updateCounter();
+        }).catch(function() {
+            ensureStateAll();
+            colorPicker.value = currentColor;
+            updateNav();
+            render();
+            updateSubtitle();
+            updateCounter();
+        });
+    }
+
+    function saveState() {
+        localStorage.setItem('hsk_marks', JSON.stringify(coloredState));
+        syncToCloud();
+    }
+
+    function syncToCloud() {
+        var user = auth && auth.currentUser;
+        if (!user || !db) return;
+        db.collection('users').doc(user.uid).set({
+            marks: JSON.parse(JSON.stringify(coloredState)),
+            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+        }, { merge: true }).catch(function() {});
+    }
+
+    function updateNav() {
+        navBar.innerHTML = '';
+        Object.keys(HSK_DATA).forEach(id => {
+            const btn = document.createElement('button');
+            btn.className = 'nav-btn' + (id === currentLevel ? ' active' : '');
+            btn.dataset.level = id;
+            btn.innerHTML = '<span class="level-badge" style="background:' + HSK_DATA[id].color + ';"></span>' + HSK_DATA[id].name;
+            btn.addEventListener('click', function() {
+                if (this.classList.contains('active')) return;
+                switchLevel(this.dataset.level);
+            });
+            navBar.appendChild(btn);
+        });
+    }
+
+    function updateSubtitle() {
+        const data = HSK_DATA[currentLevel];
+        subtitle.innerHTML = 'Нажми на квадрат, чтобы закрасить его в цвет уровня &nbsp; <span style="background:' + data.color + '; color: white; padding: 2px 14px; border-radius: 40px; font-weight: 500;">' + data.name.toLowerCase() + '</span>';
+        subtitle.style.borderLeft = '4px solid ' + data.color;
+        subtitle.style.background = data.bg;
+    }
+
+    function switchLevel(level) {
+        saveState();
+        currentLevel = level;
+        ensureState(level);
+        currentColor = HSK_DATA[level].color;
+        colorPicker.value = currentColor;
+        updateNav();
+        updateSubtitle();
+        render();
+    }
+
+    function render() {
+        const data = HSK_DATA[currentLevel];
+        grid.innerHTML = '';
+        data.words.forEach((word, idx) => {
+            const cell = document.createElement('div');
+            cell.className = 'cell';
+            if (coloredState[currentLevel] && coloredState[currentLevel][idx]) {
+                cell.style.backgroundColor = currentColor;
+                cell.classList.add('colored');
+            }
+            cell.textContent = word;
+            cell.dataset.index = idx;
+
+            const sp = document.createElement('span');
+            sp.className = 'speaker';
+            sp.textContent = '🔊';
+            sp.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const btn = this;
+                btn.classList.add('playing');
+                const a = document.getElementById('ttsAudio');
+                if (!window.speechSynthesis) { btn.classList.remove('playing'); return; }
+                speechSynthesis.cancel();
+                const u = new SpeechSynthesisUtterance(word);
+                u.lang = 'zh-CN';
+                u.rate = 0.9;
+                if (selectedVoice) {
+                    const v = speechSynthesis.getVoices().filter(function(x) { return x.voiceURI === selectedVoice; })[0];
+                    if (v) u.voice = v;
+                }
+                u.onend = function() { btn.classList.remove('playing'); };
+                u.onerror = function() { btn.classList.remove('playing'); };
+                speechSynthesis.speak(u);
+            });
+            cell.appendChild(sp);
+
+            const tb = document.createElement('span');
+            tb.className = 'trans-btn';
+            tb.textContent = '🌐';
+            const popup = document.getElementById('transPopup');
+            tb.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const rect = cell.getBoundingClientRect();
+                popup.innerHTML = '<div class="ch">' + word + '</div><div class="loading">Перевод...</div>';
+                popup.style.left = Math.max(8, rect.left + rect.width / 2 - 140) + 'px';
+                popup.style.top = (rect.top - 10) + 'px';
+                popup.classList.add('show');
+                fetch('https://translate.googleapis.com/translate_a/single?client=gtx&sl=zh-CN&tl=ru&dt=t&q=' + encodeURIComponent(word))
+                    .then(r => r.json())
+                    .then(d => {
+                        const t = d[0]?.[0]?.[0];
+                        if (t) {
+                            popup.innerHTML = '<div class="ch">' + word + '</div><div class="ru">' + t + '</div>';
+                        } else {
+                            popup.innerHTML = '<div class="ch">' + word + '</div><div class="ru">—</div>';
+                        }
+                    })
+                    .catch(() => {
+                        popup.innerHTML = '<div class="ch">' + word + '</div><div class="ru">Ошибка</div>';
+                    });
+            });
+            cell.appendChild(tb);
+
+            cell.addEventListener('click', function() {
+                const i = parseInt(this.dataset.index);
+                coloredState[currentLevel][i] = !coloredState[currentLevel][i];
+                if (coloredState[currentLevel][i]) {
+                    this.style.backgroundColor = currentColor;
+                    this.classList.add('colored');
+                } else {
+                    this.style.backgroundColor = '#ffffff';
+                    this.classList.remove('colored');
+                }
+                updateCounter();
+                saveState();
+            });
+            grid.appendChild(cell);
+        });
+        totalSpan.textContent = data.words.length;
+        updateCounter();
+    }
+
+    function updateCounter() {
+        const count = (coloredState[currentLevel] || []).filter(v => v).length;
+        counterSpan.textContent = 'Выучено: ' + count + ' / ' + HSK_DATA[currentLevel].words.length;
+    }
+
+    function resetAll() {
+        coloredState[currentLevel].fill(false);
+        document.querySelectorAll('.cell').forEach(cell => {
+            cell.style.backgroundColor = '#ffffff';
+            cell.classList.remove('colored');
+        });
+        updateCounter();
+        saveState();
+    }
+
+    function applyColorToAllColored(newColor) {
+        document.querySelectorAll('.cell').forEach((cell, idx) => {
+            if (coloredState[currentLevel][idx]) {
+                cell.style.backgroundColor = newColor;
+            }
+        });
+    }
+
+    voiceSelect.addEventListener('click', function() {
+        if (this.options.length <= 1 && window.speechSynthesis) {
+            var v = speechSynthesis.getVoices();
+            if (v.length > 0) populateVoices();
+        }
+    });
+    voiceSelect.addEventListener('change', function() {
+        selectedVoice = this.value || null;
+        saveState();
+    });
+
+    colorPicker.addEventListener('input', function(e) {
+        currentColor = e.target.value;
+        applyColorToAllColored(currentColor);
+        saveState();
+    });
+
+    resetBtn.addEventListener('click', resetAll);
+
+    if (window.speechSynthesis) speechSynthesis.getVoices();
+
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.trans-btn') && !e.target.closest('#transPopup')) {
+            document.getElementById('transPopup').classList.remove('show');
+        }
+    });
+
+    auth.onAuthStateChanged(function() { loadState(); });
+</script>
+</body>
+</html>

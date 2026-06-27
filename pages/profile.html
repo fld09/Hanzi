@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hanzi — Профиль</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background: #f1f5f9;
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 10px;
+        }
+        .app-container {
+            max-width: 700px;
+            width: 100%;
+            background: white;
+            border-radius: 28px;
+            padding: 28px 24px 36px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+        }
+        .top-bar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        .back-btn {
+            text-decoration: none;
+            color: #475569;
+            font-size: 1.4rem;
+            transition: 0.15s;
+        }
+        .back-btn:hover {
+            color: #1e293b;
+        }
+        h1 {
+            font-weight: 500;
+            font-size: 1.5rem;
+            color: #1e293b;
+        }
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 20px;
+            margin-bottom: 24px;
+        }
+        .avatar {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            flex-shrink: 0;
+        }
+        .profile-info {
+            text-align: left;
+        }
+        .profile-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1e293b;
+        }
+        .profile-email {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-top: 2px;
+        }
+        .profile-join {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-top: 4px;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        .stat-card {
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 18px 12px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+        .stat-number {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #1e293b;
+        }
+        .stat-label {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-top: 4px;
+        }
+        .section-title {
+            font-weight: 500;
+            font-size: 1rem;
+            color: #1e293b;
+            margin-bottom: 12px;
+        }
+        .progress-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .progress-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .progress-item .label {
+            width: 60px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #475569;
+            flex-shrink: 0;
+        }
+        .progress-bar-bg {
+            flex: 1;
+            height: 10px;
+            background: #e2e8f0;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        .progress-bar-fill {
+            height: 100%;
+            border-radius: 20px;
+            width: 0%;
+            transition: width 0.3s;
+        }
+        .progress-item .count {
+            font-size: 0.8rem;
+            color: #64748b;
+            width: 50px;
+            text-align: right;
+            flex-shrink: 0;
+        }
+        @media (max-width: 500px) {
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .profile-info {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+    <div class="top-bar">
+        <a class="back-btn" href="../index.html">←</a>
+        <h1 style="flex:1;">👤 Профиль</h1>
+        <button onclick="logout()" style="background:none;border:1px solid #e2e8f0;border-radius:40px;padding:8px 16px;cursor:pointer;color:#64748b;font-size:0.85rem;transition:0.15s;" onmouseover="this.style.borderColor='#94a3b8'" onmouseout="this.style.borderColor='#e2e8f0'">Выйти</button>
+    </div>
+
+    <div class="profile-header">
+        <div class="avatar" id="avatar">🧑‍🎓</div>
+        <div class="profile-info">
+            <div class="profile-name" id="profileName">Ученик</div>
+            <div class="profile-email" id="profileEmail">email@example.com</div>
+            <div class="profile-join" id="profileJoin">Загрузка...</div>
+        </div>
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-number" id="totalLearned">0</div>
+            <div class="stat-label">Выучено слов</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">0</div>
+            <div class="stat-label">Дней подряд</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">0%</div>
+            <div class="stat-label">Общий прогресс</div>
+        </div>
+    </div>
+
+    <div class="section-title">📊 Прогресс по уровням</div>
+    <div class="progress-list" id="progressList">
+        <div class="progress-item">
+            <span class="label">HSK 1</span>
+            <div class="progress-bar-bg"><div class="progress-bar-fill" style="background:#f97316; width:0%;"></div></div>
+            <span class="count">0 / 500</span>
+        </div>
+        <div class="progress-item">
+            <span class="label">HSK 2</span>
+            <div class="progress-bar-bg"><div class="progress-bar-fill" style="background:#3b82f6; width:0%;"></div></div>
+            <span class="count">0 / 772</span>
+        </div>
+        <div class="progress-item">
+            <span class="label">HSK 3</span>
+            <div class="progress-bar-bg"><div class="progress-bar-fill" style="background:#8b5cf6; width:0%;"></div></div>
+            <span class="count">0 / 973</span>
+        </div>
+        <div class="progress-item">
+            <span class="label">HSK 4</span>
+            <div class="progress-bar-bg"><div class="progress-bar-fill" style="background:#ec4899; width:0%;"></div></div>
+            <span class="count">0 / 1000</span>
+        </div>
+        <div class="progress-item">
+            <span class="label">HSK 5</span>
+            <div class="progress-bar-bg"><div class="progress-bar-fill" style="background:#06b6d4; width:0%;"></div></div>
+            <span class="count">0 / 1071</span>
+        </div>
+        <div class="progress-item">
+            <span class="label">HSK 6</span>
+            <div class="progress-bar-bg"><div class="progress-bar-fill" style="background:#8b5cf6; width:0%;"></div></div>
+            <span class="count">0 / 1140</span>
+        </div>
+        <div class="progress-item">
+            <span class="label">HSK 7-9</span>
+            <div class="progress-bar-bg"><div class="progress-bar-fill" style="background:#f59e0b; width:0%;"></div></div>
+            <span class="count">0 / 5636</span>
+        </div>
+    </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+<script src="../js/firebase-init.js"></script>
+<script src="../data/hsk-data.js"></script>
+<script>
+    auth.onAuthStateChanged(function(user) {
+        if (!user) {
+            window.location.href = 'login.html';
+            return;
+        }
+        document.getElementById('profileName').textContent = user.displayName || 'Ученик';
+        document.getElementById('profileEmail').textContent = user.email;
+        var date = user.metadata.creationTime ? new Date(user.metadata.creationTime) : null;
+        if (date) {
+            var months = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+            document.getElementById('profileJoin').textContent = 'Зарегистрирован ' + date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear();
+        } else {
+            document.getElementById('profileJoin').textContent = '';
+        }
+    });
+
+    function logout() {
+        auth.signOut().then(function() { window.location.href = '../index.html'; });
+    }
+
+    function renderProgress(marks) {
+        if (!marks) marks = {};
+        var totalLearned = 0;
+
+        document.querySelectorAll('.progress-item').forEach(function(item) {
+            var label = item.querySelector('.label').textContent.trim();
+            var levelId = label === 'HSK 7-9' ? '7-9' : label.replace('HSK ', '');
+            var fill = item.querySelector('.progress-bar-fill');
+            var count = item.querySelector('.count');
+
+            if (HSK_DATA[levelId]) {
+                var words = HSK_DATA[levelId].words;
+                var state = marks[levelId] || [];
+                var learned = state.filter(function(v) { return v; }).length;
+                var pct = words.length > 0 ? (learned / words.length * 100) : 0;
+
+                fill.style.width = pct + '%';
+                count.textContent = learned + ' / ' + words.length;
+                totalLearned += learned;
+            }
+        });
+
+        document.getElementById('totalLearned').textContent = totalLearned;
+    }
+
+    function loadProgress() {
+        var cached = localStorage.getItem('hsk_marks');
+        if (cached) {
+            try { renderProgress(JSON.parse(cached)); } catch(e) {}
+        }
+        var u = auth && auth.currentUser;
+        if (!u || !db) { renderProgress({}); return; }
+        db.collection('users').doc(u.uid).get().then(function(doc) {
+            var marks = doc.exists ? doc.data().marks : {};
+            localStorage.setItem('hsk_marks', JSON.stringify(marks));
+            renderProgress(marks);
+        }).catch(function() { renderProgress({}); });
+    }
+
+    auth.onAuthStateChanged(function() { loadProgress(); });
+</script>
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hanzi — Главная</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background: #f1f5f9;
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 10px;
+        }
+        .app-container {
+            max-width: 700px;
+            width: 100%;
+            background: white;
+            border-radius: 28px;
+            padding: 36px 28px 40px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+        h1 {
+            font-weight: 500;
+            font-size: 2.2rem;
+            margin: 0 0 8px 0;
+            color: #1e293b;
+        }
+        .site-desc {
+            color: #64748b;
+            font-size: 1rem;
+            margin-bottom: 32px;
+        }
+        .cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 14px;
+        }
+        .card {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 20px;
+            padding: 28px 12px;
+            text-decoration: none;
+            color: #1e293b;
+            transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        .card:hover {
+            border-color: #94a3b8;
+            background: #f1f5f9;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+        }
+        .card-icon {
+            font-size: 2.4rem;
+        }
+        .card-title {
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+        .card-desc {
+            font-size: 0.82rem;
+            color: #64748b;
+        }
+        .card.soon {
+            cursor: default;
+            opacity: 0.6;
+        }
+        .card.soon:hover {
+            transform: none;
+            box-shadow: none;
+            background: #f8fafc;
+            border-color: #e2e8f0;
+        }
+        .auth-bar {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            font-size: 0.9rem;
+        }
+        .auth-bar .user-name {
+            color: #475569;
+        }
+        .auth-bar a, .auth-bar button {
+            text-decoration: none;
+            background: none;
+            border: 1px solid #e2e8f0;
+            border-radius: 40px;
+            padding: 8px 18px;
+            cursor: pointer;
+            color: #475569;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: 0.15s;
+        }
+        .auth-bar a:hover, .auth-bar button:hover {
+            border-color: #94a3b8;
+            background: #f1f5f9;
+        }
+        .auth-bar .btn-login {
+            border-color: #4f46e5;
+            color: #4f46e5;
+        }
+        .auth-bar .btn-login:hover {
+            background: #eef2ff;
+            border-color: #4f46e5;
+        }
+        .card.mark-card {
+            border-color: #a5b4fc;
+            background: #eef2ff;
+        }
+        .card.mark-card:hover {
+            border-color: #818cf8;
+            background: #e0e7ff;
+        }
+        @media (max-width: 500px) {
+            .cards {
+                grid-template-columns: 1fr;
+            }
+            h1 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+    <div class="auth-bar" id="authBar"></div>
+
+    <h1>📚 Hanzi</h1>
+    <div class="site-desc">Изучение китайского языка</div>
+
+    <div class="cards">
+        <a class="card" href="pages/profile.html">
+            <div class="card-icon">👤</div>
+            <div class="card-title">Профиль</div>
+            <div class="card-desc">Твой прогресс</div>
+        </a>
+
+        <a class="card mark-card" href="pages/marks.html">
+            <div class="card-icon">📝</div>
+            <div class="card-title">Мои отметки</div>
+            <div class="card-desc">Отмечай изученные иероглифы</div>
+        </a>
+
+        <a class="card" href="pages/grammar.html">
+            <div class="card-icon">📖</div>
+            <div class="card-title">Грамматика</div>
+            <div class="card-desc">Изучай грамматику по уровням</div>
+        </a>
+    </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+<script src="js/firebase-init.js"></script>
+<script>
+    var authBar = document.getElementById('authBar');
+    auth.onAuthStateChanged(function(user) {
+        if (user) {
+            var name = user.displayName || user.email;
+            authBar.innerHTML = '<span class="user-name">' + name + '</span> <button onclick="auth.signOut().then(function(){location.reload()})">Выйти</button>';
+        } else {
+            authBar.innerHTML = '<a class="btn-login" href="pages/login.html">Войти</a>';
+        }
+    });
+</script>
+</body>
+</html>

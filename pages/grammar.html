@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hanzi — Грамматика</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background: #f1f5f9;
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 10px;
+        }
+        .app-container {
+            max-width: 900px;
+            width: 100%;
+            background: white;
+            border-radius: 28px;
+            padding: 24px 20px 30px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+        }
+        .top-bar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .back-btn {
+            text-decoration: none;
+            color: #475569;
+            font-size: 1.4rem;
+            transition: 0.15s;
+        }
+        .back-btn:hover {
+            color: #1e293b;
+        }
+        h1 {
+            font-weight: 500;
+            font-size: 1.7rem;
+            color: #1e293b;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .nav-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #e9edf2;
+            justify-content: center;
+        }
+        .nav-btn {
+            padding: 10px 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 40px;
+            background: white;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #475569;
+            transition: all 0.2s;
+            min-width: 70px;
+            text-align: center;
+        }
+        .nav-btn:hover {
+            background: #f1f5f9;
+            border-color: #94a3b8;
+            transform: translateY(-2px);
+        }
+        .nav-btn.active {
+            background: #1e293b;
+            border-color: #1e293b;
+            color: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .nav-btn .level-badge {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 10px;
+            margin-right: 6px;
+        }
+        .topic-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .topic {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .topic:hover {
+            border-color: #94a3b8;
+        }
+        .topic-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            gap: 12px;
+        }
+        .topic-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1e293b;
+        }
+        .topic-toggle {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            transition: transform 0.2s;
+            flex-shrink: 0;
+        }
+        .topic.open .topic-toggle {
+            transform: rotate(90deg);
+        }
+        .topic-content {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.5s ease;
+        }
+        .topic-content > * {
+            overflow: hidden;
+            min-height: 0;
+        }
+        .topic.open .topic-content {
+            grid-template-rows: 1fr;
+        }
+        .topic-inner {
+            padding: 0 20px;
+        }
+        .topic.open .topic-inner {
+            padding: 0 20px 20px;
+        }
+        .topic-explain {
+            color: #475569;
+            font-size: 0.93rem;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        .topic-examples {
+            background: white;
+            border-radius: 12px;
+            padding: 12px 16px;
+            border: 1px solid #e2e8f0;
+            margin-top: 10px;
+        }
+        .topic-examples .ex {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            padding: 4px 0;
+            font-size: 0.9rem;
+        }
+        .topic-examples .ex .cn {
+            font-weight: 500;
+            color: #1e293b;
+        }
+        .topic-examples .ex .ru {
+            color: #64748b;
+        }
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #94a3b8;
+            font-size: 1rem;
+        }
+        @media (max-width: 600px) {
+            .nav-btn {
+                padding: 8px 14px;
+                font-size: 0.8rem;
+                min-width: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+    <div class="top-bar">
+        <a class="back-btn" href="../index.html">←</a>
+        <h1>📖 Грамматика</h1>
+    </div>
+
+    <nav class="nav-bar" id="navBar"></nav>
+
+    <div class="topic-list" id="topicList">
+        <div class="empty-state">Выбери уровень, чтобы увидеть темы</div>
+    </div>
+</div>
+
+<script>
+    const GRAMMAR_DATA = {
+        '1': {
+            name: 'HSK 1', color: '#f97316', bg: '#fff7ed',
+            topics: [
+                {
+                    title: 'Глагол-связка 是 (shì)',
+                    explain: 'Глагол-связка «быть, являться». В китайском языке 是 используется для связи подлежащего и именного сказуемого. Отрицание образуется с помощью 不是.',
+                    examples: [
+                        { cn: '我是学生。', ru: 'Я — студент.' },
+                        { cn: '这不是书。', ru: 'Это не книга.' },
+                        { cn: '他是老师吗？', ru: 'Он учитель?' }
+                    ]
+                },
+                {
+                    title: 'Наречие 很 (hěn)',
+                    explain: 'Наречие «очень». В китайском языке прилагательные не требуют глагола-связки — 很 ставится между подлежащим и прилагательным. Часто 很 теряет значение «очень» и служит просто для связи.',
+                    examples: [
+                        { cn: '她很漂亮。', ru: 'Она красивая.' },
+                        { cn: '这个苹果很大。', ru: 'Это яблоко большое.' },
+                        { cn: '天气很好。', ru: 'Погода хорошая.' }
+                    ]
+                },
+                {
+                    title: 'Модальные глаголы 会 / 能 / 可以',
+                    explain: '会 (huì) — «уметь, мочь» (навык). 能 (néng) — «мочь» (физическая возможность или разрешение). 可以 (kěyǐ) — «можно, разрешено».',
+                    examples: [
+                        { cn: '我会说汉语。', ru: 'Я умею говорить по-китайски.' },
+                        { cn: '我能去吗？', ru: 'Я могу пойти?' },
+                        { cn: '我可以进来吗？', ru: 'Можно войти?' }
+                    ]
+                }
+            ]
+        },
+        '2': {
+            name: 'HSK 2', color: '#3b82f6', bg: '#eff6ff',
+            topics: [
+                {
+                    title: 'Суффикс 了 (le) — завершённость',
+                    explain: 'Суффикс 了 ставится после глагола и указывает на завершённость действия. Не путать с модальной частицей 了 в конце предложения (смена состояния).',
+                    examples: [
+                        { cn: '我吃了饭。', ru: 'Я поел.' },
+                        { cn: '他买了手机。', ru: 'Он купил телефон.' },
+                        { cn: '你看了电影吗？', ru: 'Ты посмотрел фильм?' }
+                    ]
+                },
+                {
+                    title: 'Конструкция 比 (bǐ) — сравнение',
+                    explain: 'Конструкция «A 比 B + прилагательное» используется для сравнения. Для отрицания используется 没有: «A 没有 B + прилагательное» (A не такой B, как…).',
+                    examples: [
+                        { cn: '他比我高。', ru: 'Он выше меня.' },
+                        { cn: '今天比昨天热。', ru: 'Сегодня жарче, чем вчера.' },
+                        { cn: '我没有他高。', ru: 'Я не такой высокий, как он.' }
+                    ]
+                },
+                {
+                    title: 'Модальная частица 了 — смена состояния',
+                    explain: 'Частица 了 в конце предложения указывает на изменение ситуации или новое состояние. Отличается от глагольного суффикса 了 (завершённость).',
+                    examples: [
+                        { cn: '我饿了。', ru: 'Я проголодался (раньше не был голоден).' },
+                        { cn: '他会汉语了。', ru: 'Он теперь знает китайский.' },
+                        { cn: '下雨了。', ru: 'Пошёл дождь (раньше не шёл).' }
+                    ]
+                }
+            ]
+        },
+        '3': {
+            name: 'HSK 3', color: '#8b5cf6', bg: '#f5f3ff',
+            topics: [
+                {
+                    title: 'Конструкция 把 (bǎ) — управление объектом',
+                    explain: 'Конструкция «把 + объект + глагол» используется, когда действие направлено на конкретный объект и изменяет его положение или состояние. Подлежащее совершает действие над объектом.',
+                    examples: [
+                        { cn: '我把门打开了。', ru: 'Я открыл дверь.' },
+                        { cn: '请把书放在桌子上。', ru: 'Положи книгу на стол, пожалуйста.' },
+                        { cn: '他把苹果吃了。', ru: 'Он съел яблоко.' }
+                    ]
+                },
+                {
+                    title: 'Сравнение 才 и 就',
+                    explain: '才 (cái) — «только тогда, лишь» (действие произошло позже ожидаемого). 就 (jiù) — «уже, сразу» (действие произошло раньше или быстрее ожидаемого).',
+                    examples: [
+                        { cn: '他八点才来。', ru: 'Он пришёл только в 8 (поздно).' },
+                        { cn: '他八点就来了。', ru: 'Он пришёл уже в 8 (рано).' },
+                        { cn: '我吃了饭才走。', ru: 'Я уйду только после еды.' }
+                    ]
+                },
+                {
+                    title: 'Конструкция 虽然…但是… — уступка',
+                    explain: '虽然 (suīrán) — «хотя», 但是 (dànshì) — «но». Конструкция используется для выражения уступки: «хотя A, но B».',
+                    examples: [
+                        { cn: '虽然很累，但是我很高兴。', ru: 'Хотя я устал, но я очень рад.' },
+                        { cn: '虽然贵，但是质量很好。', ru: 'Хотя дорого, но качество хорошее.' },
+                        { cn: '虽然下雨，但是他不带伞。', ru: 'Хотя идёт дождь, он не берёт зонт.' }
+                    ]
+                }
+            ]
+        },
+        '4': {
+            name: 'HSK 4', color: '#ec4899', bg: '#fdf2f8',
+            topics: [
+                {
+                    title: 'Конструкция 不仅…而且… — не только… но и…',
+                    explain: '不仅 (bùjǐn) — «не только», 而且 (érqiě) — «но и». Указывает на два связанных качества или действия, причём второе более значимое.',
+                    examples: [
+                        { cn: '他不仅聪明，而且努力。', ru: 'Он не только умный, но и старательный.' },
+                        { cn: '这不仅便宜，而且好看。', ru: 'Это не только дёшево, но и красиво.' },
+                        { cn: '她不仅会说英语，还会说法语。', ru: 'Она не только говорит по-английски, но и по-французски.' }
+                    ]
+                },
+                {
+                    title: '由于 (yóuyú) — причина и следствие',
+                    explain: '由于 — «из-за, благодаря, в связи с». Указывает на причину. Часто используется в формальной речи. Следствие может вводиться через 所以.',
+                    examples: [
+                        { cn: '由于天气不好，比赛取消了。', ru: 'Из-за плохой погоды соревнования отменили.' },
+                        { cn: '由于他的帮助，我成功了。', ru: 'Благодаря его помощи я добился успеха.' },
+                        { cn: '由于生病，他没来上课。', ru: 'Из-за болезни он не пришёл на урок.' }
+                    ]
+                },
+                {
+                    title: 'Косвенная речь с 说 / 问',
+                    explain: 'В китайском косвенная речь вводится глаголами 说 (shuō) и 问 (wèn). Порядок слов сохраняется как в прямой речи, вопросительные слова не меняются.',
+                    examples: [
+                        { cn: '他说他明天不来。', ru: 'Он сказал, что завтра не придёт.' },
+                        { cn: '她问我去不去。', ru: 'Она спросила, пойду ли я.' },
+                        { cn: '老师告诉我们考试很难。', ru: 'Учитель сказал нам, что экзамен трудный.' }
+                    ]
+                }
+            ]
+        },
+        '5': {
+            name: 'HSK 5', color: '#06b6d4', bg: '#ecfeff',
+            topics: [
+                {
+                    title: '无论…都… — независимо от…',
+                    explain: '无论 (wúlùn) — «независимо от, несмотря на». Всегда paired с 都 или 也. Указывает, что результат не меняется при любых условиях.',
+                    examples: [
+                        { cn: '无论多难，我都要学。', ru: 'Независимо от сложности, я буду учить.' },
+                        { cn: '无论你去哪儿，我都跟你去。', ru: 'Куда бы ты ни пошёл, я пойду с тобой.' },
+                        { cn: '无论他怎么解释，她都不信。', ru: 'Как бы он ни объяснял, она не верит.' }
+                    ]
+                },
+                {
+                    title: '之所以…是因为… — причина',
+                    explain: '之所以 (zhī suǒyǐ)… 是因为 (shì yīnwèi)… — «причина, по которой… заключается в том, что…». Подчёркивает причину. Используется в письменной и формальной речи.',
+                    examples: [
+                        { cn: '他之所以成功，是因为努力。', ru: 'Причина его успеха в том, что он старался.' },
+                        { cn: '我之所以学汉语，是因为喜欢中国文化。', ru: 'Я учу китайский потому, что люблю китайскую культуру.' },
+                        { cn: '之所以迟到，是因为堵车。', ru: 'Причина опоздания — пробка.' }
+                    ]
+                },
+                {
+                    title: '否则 (fǒuzé) — в противном случае',
+                    explain: '否则 — «иначе, в противном случае». Указывает на негативное последствие, если не выполнить условие. Аналог «а то» в русском.',
+                    examples: [
+                        { cn: '快走吧，否则要迟到了。', ru: 'Иди быстрее, иначе опоздаешь.' },
+                        { cn: '你得复习，否则考不好。', ru: 'Тебе нужно повторить, иначе не сдашь экзамен.' },
+                        { cn: '早点儿睡，否则明天会累。', ru: 'Ложись пораньше, а то завтра будешь уставшим.' }
+                    ]
+                }
+            ]
+        },
+        '6': {
+            name: 'HSK 6', color: '#8b5cf6', bg: '#f5f3ff',
+            topics: [
+                {
+                    title: '毕竟 (bìjìng) — в конце концов / всё же',
+                    explain: '毕竟 — «в конце концов, всё-таки, ведь». Подчёркивает объективную причину или суть дела. Смягчает утверждение, напоминает о важном факте.',
+                    examples: [
+                        { cn: '毕竟他是孩子，别怪他。', ru: 'Всё же он ребёнок, не вини его.' },
+                        { cn: '毕竟是第一次来，不熟很正常。', ru: 'В конце концов, он здесь впервые, неудивительно, что не熟悉.' },
+                        { cn: '毕竟学了三年，汉语很不错。', ru: 'Всё-таки учил три года, китайский неплохой.' }
+                    ]
+                },
+                {
+                    title: '以至于 (yǐzhìyú) — до такой степени, что',
+                    explain: '以至于 — «до такой степени, что; настолько, что». Указывает на высшую степень проявления качества или действия и его результат.',
+                    examples: [
+                        { cn: '他太忙了，以至于忘了吃饭。', ru: 'Он был так занят, что забыл поесть.' },
+                        { cn: '他说得很快，以至于我没听懂。', ru: 'Он говорил так быстро, что я не понял.' },
+                        { cn: '她很伤心，以至于哭了一整夜。', ru: 'Ей было так грустно, что она проплакала всю ночь.' }
+                    ]
+                },
+                {
+                    title: '鉴于 (jiànyú) — принимая во внимание',
+                    explain: '鉴于 — «ввиду того что, принимая во внимание». Используется в официальной и письменной речи для обоснования решения или действия.',
+                    examples: [
+                        { cn: '鉴于情况特殊，我们延期了。', ru: 'Ввиду особых обстоятельств, мы перенесли сроки.' },
+                        { cn: '鉴于他的表现，公司给他加薪。', ru: 'Принимая во внимание его работу, компания повысила ему зарплату.' },
+                        { cn: '鉴于问题的严重性，需要立即处理。', ru: 'Учитывая серьёзность проблемы, нужно решить её немедленно.' }
+                    ]
+                }
+            ]
+        },
+        '7-9': {
+            name: 'HSK 7-9', color: '#f59e0b', bg: '#fffbeb',
+            topics: [
+                {
+                    title: '乃至 (nǎizhì) — вплоть до / и даже',
+                    explain: '乃至 — «вплоть до, и даже». Более формальный аналог 甚至. Используется для перечисления крайней степени или последнего элемента в ряду.',
+                    examples: [
+                        { cn: '全中国乃至全世界都知道他。', ru: 'Его знает весь Китай и даже весь мир.' },
+                        { cn: '这本书影响了数代乃至数十代人。', ru: 'Эта книга повлияла на несколько поколений, вплоть до десятков поколений.' },
+                        { cn: '他从未去过北京乃至中国。', ru: 'Он никогда не был в Пекине и даже в Китае.' }
+                    ]
+                },
+                {
+                    title: '一味 (yīwèi) — слепо / упорно',
+                    explain: '一味 — «слепо, упорно, бездумно». Описывает действие, которое выполняется настойчиво, часто с негативным оттенком — без учёта обстоятельств.',
+                    examples: [
+                        { cn: '不能一味地模仿别人。', ru: 'Нельзя слепо копировать других.' },
+                        { cn: '他一味地追求名利。', ru: 'Он бездумно гонится за славой и выгодой.' },
+                        { cn: '一味地抱怨没用。', ru: 'Бесполезно только жаловаться.' }
+                    ]
+                },
+                {
+                    title: '不乏 (bùfá) — нет недостатка в',
+                    explain: '不乏 — «нет недостатка в, имеется немало». Книжное выражение, указывающее на наличие большого количества чего-либо (обычно положительного).',
+                    examples: [
+                        { cn: '这样的人不乏其例。', ru: 'Таких примеров немало.' },
+                        { cn: '中国不乏优秀的人才。', ru: 'В Китае нет недостатка в талантливых людях.' },
+                        { cn: '历史上不乏这样的先例。', ru: 'В истории немало таких прецедентов.' }
+                    ]
+                }
+            ]
+        }
+    };
+
+    const GRAMMAR_LEVELS = ['1','2','3','4','5','6','7-9'];
+
+    const navBar = document.getElementById('navBar');
+    const topicList = document.getElementById('topicList');
+    let currentLevel = '1';
+
+    function buildNav() {
+        navBar.innerHTML = '';
+        GRAMMAR_LEVELS.forEach(id => {
+            const data = GRAMMAR_DATA[id];
+            const btn = document.createElement('button');
+            btn.className = 'nav-btn' + (id === currentLevel ? ' active' : '');
+            btn.dataset.level = id;
+            btn.innerHTML = '<span class="level-badge" style="background:' + data.color + ';"></span>' + data.name;
+            btn.addEventListener('click', function() {
+                if (this.classList.contains('active')) return;
+                switchLevel(this.dataset.level);
+            });
+            navBar.appendChild(btn);
+        });
+    }
+
+    function switchLevel(level) {
+        currentLevel = level;
+        buildNav();
+        renderTopics();
+    }
+
+    function renderTopics() {
+        const data = GRAMMAR_DATA[currentLevel];
+        if (!data || !data.topics) {
+            topicList.innerHTML = '<div class="empty-state">Нет тем для этого уровня</div>';
+            return;
+        }
+        topicList.innerHTML = '';
+        data.topics.forEach(topic => {
+            const div = document.createElement('div');
+            div.className = 'topic';
+
+            let examplesHtml = '';
+            topic.examples.forEach(ex => {
+                examplesHtml += '<div class="ex"><span class="cn">' + ex.cn + '</span><span class="ru">— ' + ex.ru + '</span></div>';
+            });
+
+            div.innerHTML = `
+                <div class="topic-header">
+                    <div class="topic-title">${topic.title}</div>
+                    <div class="topic-toggle">▶</div>
+                </div>
+                <div class="topic-content">
+                    <div class="topic-inner">
+                        <div class="topic-explain">${topic.explain}</div>
+                        <div class="topic-examples">${examplesHtml}</div>
+                    </div>
+                </div>
+            `;
+            div.addEventListener('click', function() {
+                this.classList.toggle('open');
+            });
+            topicList.appendChild(div);
+        });
+    }
+
+    buildNav();
+    renderTopics();
+</script>
+</body>
+</html>
