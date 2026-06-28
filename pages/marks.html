@@ -54,7 +54,7 @@
             border-radius: 10px;
             margin-right: 6px;
         }
-        .subtitle { font-size: 1rem; margin-bottom: 20px; padding-left: 16px; border-radius: 0 12px 12px 0; line-height: 1.5; }
+        .subtitle { font-size: 1rem; margin-bottom: 20px; padding-left: 16px; border-radius: 0 12px 12px 0; line-height: 1.5; min-height: 2.2em; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
         .toolbar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-bottom: 24px; padding: 12px 18px; border-radius: 60px; background: var(--toolbar-bg); border: 1px solid var(--toolbar-border); }
         .color-picker-area { display: flex; align-items: center; gap: 12px; }
         .color-picker-area label { font-weight: 500; }
@@ -272,7 +272,7 @@
         const data = HSK_DATA[currentLevel];
         subtitle.innerHTML = 'Нажми на квадрат, чтобы закрасить его в цвет уровня &nbsp; <span style="background:' + data.color + '; color: white; padding: 2px 14px; border-radius: 40px; font-weight: 500;">' + data.name.toLowerCase() + '</span>';
         subtitle.style.borderLeft = '4px solid ' + data.color;
-        subtitle.style.background = data.bg;
+        subtitle.style.background = '';
     }
 
     function switchLevel(level) {
@@ -356,7 +356,7 @@
                     this.style.backgroundColor = currentColor;
                     this.classList.add('colored');
                 } else {
-                    this.style.backgroundColor = '#ffffff';
+                    this.style.backgroundColor = '';
                     this.classList.remove('colored');
                 }
                 updateCounter();
@@ -376,7 +376,7 @@
     function resetAll() {
         coloredState[currentLevel].fill(false);
         document.querySelectorAll('.cell').forEach(cell => {
-            cell.style.backgroundColor = '#ffffff';
+            cell.style.backgroundColor = '';
             cell.classList.remove('colored');
         });
         updateCounter();
