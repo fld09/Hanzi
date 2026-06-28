@@ -199,7 +199,6 @@
 
 /* === Встроенные стили с использованием переменных === */
 body { background: var(--bg); color: var(--text); }
-body:not(.ready) { display: none; }
 .app-container { background: var(--card-bg); border: 1px solid var(--card-border); box-shadow: 0 24px 48px rgba(0,0,0,0.4); }
 h1, h2, h3 { color: var(--text); }
 .site-desc { color: var(--text-muted); }

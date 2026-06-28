@@ -6,7 +6,6 @@
     <title>Hanzi — Регистрация</title>
     <link rel="stylesheet" href="../css/themes.css">
     <script src="../js/themes.js"></script>
-<script>document.body.classList.add('ready');</script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -53,7 +52,7 @@
         .card { animation: fadeUp 0.5s ease; }
     </style>
 </head>
-<body>
+<body><script>try { document.body.classList.add('theme-' + (localStorage.getItem('hsk_theme') || 'night')); document.body.classList.add('ready'); } catch(e) {}</script>
 <div class="card">
     <a class="back" href="../index.html">← На главную</a>
     <h1>📚 <span>Hanzi</span></h1>

@@ -13,6 +13,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         * { box-sizing: border-box; user-select: none; margin: 0; padding: 0; }
+        body:not(.ready) { display: none; }
         body {
             font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
             min-height: 100vh;
@@ -290,7 +291,7 @@
         }
     </style>
 </head>
-<body>
+<body><script>try { document.body.classList.add('theme-' + (localStorage.getItem('hsk_theme') || 'night')); } catch(e) {}</script>
 <div class="app-container">
     <div class="top-bar">
         <a class="back-btn" href="../index.html">←</a>
