@@ -8,6 +8,7 @@
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
     <script src="js/firebase-init.js"></script>
     <link rel="stylesheet" href="css/themes.css">
+    <script src="js/themes.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -92,7 +93,7 @@
         @media (max-width: 500px) { .cards { grid-template-columns: 1fr; } h1 { font-size: 1.6rem; } .app-container { padding: 28px 20px 32px; } }
     </style>
 </head>
-<body><script>try { document.body.classList.add('theme-' + (localStorage.getItem('hsk_theme') || 'night')); } catch(e) {}</script>
+<body>
 
 <div class="app-container">
     <div class="auth-bar" id="authBar"></div>
@@ -136,6 +137,5 @@
         });
     });
 </script>
-<script src="js/themes.js"></script>
 </body>
 </html>
