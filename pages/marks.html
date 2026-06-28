@@ -54,216 +54,37 @@
             border-radius: 10px;
             margin-right: 6px;
         }
-        .subtitle {
-            color: rgba(255,255,255,0.6);
-            font-size: 1rem;
-            margin-bottom: 20px;
-            padding-left: 16px;
-            border-radius: 0 12px 12px 0;
-            line-height: 1.5;
-        }
-        .toolbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 16px;
-            margin-bottom: 24px;
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.06);
-            padding: 12px 18px;
-            border-radius: 60px;
-        }
-        .color-picker-area {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .color-picker-area label {
-            font-weight: 500;
-            color: rgba(255,255,255,0.6);
-        }
-        .voice-select {
-            padding: 6px 12px;
-            border: 1px solid rgba(255,255,255,0.15);
-            border-radius: 40px;
-            font-size: 0.85rem;
-            background: rgba(255,255,255,0.06);
-            color: rgba(255,255,255,0.7);
-            cursor: pointer;
-            max-width: 160px;
-        }
-        .voice-select option { background: #1e1b4b; color: white; }
-        input[type="color"] {
-            width: 44px;
-            height: 44px;
-            border: 2px solid rgba(255,255,255,0.15);
-            border-radius: 40px;
-            background: rgba(255,255,255,0.05);
-            cursor: pointer;
-            padding: 2px;
-        }
-        input[type="color"]::-webkit-color-swatch-wrapper {
-            padding: 0;
-        }
-        input[type="color"]::-webkit-color-swatch {
-            border: none;
-            border-radius: 40px;
-        }
-        .stats {
-            display: flex;
-            align-items: center;
-            gap: 18px;
-            color: rgba(255,255,255,0.7);
-            font-size: 0.95rem;
-        }
-        .stats span {
-            background: rgba(255,255,255,0.06);
-            padding: 6px 16px;
-            border-radius: 30px;
-            border: 1px solid rgba(255,255,255,0.06);
-        }
-        .btn-reset {
-            background: rgba(255,255,255,0.06);
-            border: 1px solid rgba(255,255,255,0.12);
-            padding: 8px 20px;
-            border-radius: 40px;
-            font-weight: 500;
-            cursor: pointer;
-            color: rgba(255,255,255,0.6);
-            transition: 0.15s;
-            font-size: 0.9rem;
-        }
-        .btn-reset:hover {
-            background: rgba(255,255,255,0.1);
-            border-color: rgba(255,255,255,0.25);
-            color: white;
-        }
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-            gap: 8px;
-            margin-top: 6px;
-        }
-        .cell {
-            aspect-ratio: 1 / 1;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.6rem;
-            font-weight: 500;
-            color: white;
-            cursor: pointer;
-            transition: background 0.15s, box-shadow 0.1s, transform 0.1s;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            padding: 0 2px;
-            word-break: break-all;
-            position: relative;
-        }
-        .cell .speaker {
-            position: absolute;
-            top: 4px;
-            right: 4px;
-            font-size: 0.75rem;
-            cursor: pointer;
-            background: rgba(30,27,75,0.85);
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            line-height: 1;
-            opacity: 0;
-            transition: opacity 0.15s;
-        }
-        .cell:hover .speaker, .cell .speaker.playing {
-            opacity: 1;
-        }
-        .cell .speaker:active {
-            transform: scale(1.2);
-        }
-        .cell .speaker.playing {
-            color: #a5b4fc;
-        }
-        .cell .trans-btn {
-            position: absolute;
-            top: 4px;
-            left: 4px;
-            font-size: 0.7rem;
-            cursor: pointer;
-            background: rgba(30,27,75,0.85);
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            line-height: 1;
-            opacity: 0;
-            transition: opacity 0.15s;
-        }
-        .cell:hover .trans-btn, .cell .trans-btn:focus {
-            opacity: 1;
-        }
-        .cell .trans-btn:active {
-            transform: scale(1.2);
-        }
-        .touch .cell .speaker, .touch .cell .trans-btn {
-            opacity: 1;
-        }
-        .trans-popup {
-            position: fixed;
-            background: rgba(30,27,75,0.95);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255,255,255,0.1);
-            color: white;
-            padding: 10px 16px;
-            border-radius: 12px;
-            font-size: 0.9rem;
-            z-index: 1000;
-            max-width: 280px;
-            box-shadow: 0 16px 32px rgba(0,0,0,0.4);
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.2s;
-        }
-        .trans-popup.show {
-            opacity: 1;
-        }
-        .trans-popup .ch {
-            font-weight: 600;
-            font-size: 1.1rem;
-            margin-bottom: 2px;
-        }
-        .trans-popup .ru {
-            color: #cbd5e1;
-        }
-        .trans-popup .loading {
-            color: #94a3b8;
-            font-size: 0.8rem;
-        }
-        .cell:hover {
-            background: rgba(255,255,255,0.1);
-            border-color: rgba(255,255,255,0.25);
-            transform: scale(1.02);
-            z-index: 2;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-        }
-        .cell.colored {
-            border-color: rgba(255,255,255,0.3);
-        }
-        .footer-hint {
-            margin-top: 24px;
-            font-size: 0.9rem;
-            color: rgba(255,255,255,0.3);
-            text-align: center;
-            border-top: 1px solid rgba(255,255,255,0.06);
-            padding-top: 20px;
-        }
+        .subtitle { font-size: 1rem; margin-bottom: 20px; padding-left: 16px; border-radius: 0 12px 12px 0; line-height: 1.5; }
+        .toolbar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-bottom: 24px; padding: 12px 18px; border-radius: 60px; background: var(--toolbar-bg); border: 1px solid var(--toolbar-border); }
+        .color-picker-area { display: flex; align-items: center; gap: 12px; }
+        .color-picker-area label { font-weight: 500; }
+        .voice-select { padding: 6px 12px; border: 1px solid var(--input-border); border-radius: 40px; font-size: 0.85rem; background: var(--input-bg); cursor: pointer; max-width: 160px; }
+        .voice-select option { background: var(--select-bg); color: var(--text); }
+        input[type="color"] { width: 44px; height: 44px; border: 2px solid var(--input-border); border-radius: 40px; background: var(--input-bg); cursor: pointer; padding: 2px; }
+        input[type="color"]::-webkit-color-swatch-wrapper { padding: 0; }
+        input[type="color"]::-webkit-color-swatch { border: none; border-radius: 40px; }
+        .stats { display: flex; align-items: center; gap: 18px; font-size: 0.95rem; }
+        .stats span { padding: 6px 16px; border-radius: 30px; background: var(--stat-bg); border: 1px solid var(--stat-border); }
+        .btn-reset { border: 1px solid var(--input-border); padding: 8px 20px; border-radius: 40px; font-weight: 500; cursor: pointer; transition: 0.15s; font-size: 0.9rem; background: var(--stat-bg); }
+        .btn-reset:hover { background: var(--card-hover); border-color: var(--card-hover-border); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 8px; margin-top: 6px; }
+        .cell { aspect-ratio: 1 / 1; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; font-weight: 500; cursor: pointer; transition: background 0.15s, box-shadow 0.1s, transform 0.1s; box-shadow: 0 2px 4px rgba(0,0,0,0.1); padding: 0 2px; word-break: break-all; position: relative; }
+        .cell .speaker { position: absolute; top: 4px; right: 4px; font-size: 0.75rem; cursor: pointer; background: var(--popup-bg); border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; line-height: 1; opacity: 0; transition: opacity 0.15s; }
+        .cell:hover .speaker, .cell .speaker.playing { opacity: 1; }
+        .cell .speaker:active { transform: scale(1.2); }
+        .cell .speaker.playing { color: var(--accent-light); }
+        .cell .trans-btn { position: absolute; top: 4px; left: 4px; font-size: 0.7rem; cursor: pointer; background: var(--popup-bg); border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; line-height: 1; opacity: 0; transition: opacity 0.15s; }
+        .cell:hover .trans-btn, .cell .trans-btn:focus { opacity: 1; }
+        .cell .trans-btn:active { transform: scale(1.2); }
+        .touch .cell .speaker, .touch .cell .trans-btn { opacity: 1; }
+        .trans-popup { position: fixed; background: var(--popup-bg); backdrop-filter: blur(12px); border: 1px solid var(--card-border); padding: 10px 16px; border-radius: 12px; font-size: 0.9rem; z-index: 1000; max-width: 280px; box-shadow: 0 16px 32px rgba(0,0,0,0.4); pointer-events: none; opacity: 0; transition: opacity 0.2s; }
+        .trans-popup.show { opacity: 1; }
+        .trans-popup .ch { font-weight: 600; font-size: 1.1rem; margin-bottom: 2px; }
+        .trans-popup .ru { }
+        .trans-popup .loading { font-size: 0.8rem; }
+        .cell:hover { transform: scale(1.02); z-index: 2; box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+        .cell.colored { border-color: var(--cell-hover-border); }
+        .footer-hint { margin-top: 24px; font-size: 0.9rem; text-align: center; border-top: 1px solid var(--toolbar-border); padding-top: 20px; }
         @media (max-width: 600px) {
             .grid {
                 grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
