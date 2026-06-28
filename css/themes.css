@@ -19,6 +19,7 @@
     --nav-hover-border: rgba(255,255,255,0.25);
     --nav-active-bg: rgba(99,102,241,0.3);
     --nav-active-border: rgba(99,102,241,0.4);
+    --nav-active-text: white;
     --cell-bg: rgba(255,255,255,0.05);
     --cell-border: rgba(255,255,255,0.08);
     --cell-hover: rgba(255,255,255,0.1);
@@ -62,6 +63,7 @@
     --nav-hover-border: #94a3b8;
     --nav-active-bg: #1e293b;
     --nav-active-border: #1e293b;
+    --nav-active-text: white;
     --cell-bg: white;
     --cell-border: #e2e8f0;
     --cell-hover: #f8fafc;
@@ -105,6 +107,7 @@
     --nav-hover-border: rgba(255,255,255,0.25);
     --nav-active-bg: rgba(56,189,248,0.3);
     --nav-active-border: rgba(56,189,248,0.4);
+    --nav-active-text: white;
     --cell-bg: rgba(255,255,255,0.05);
     --cell-border: rgba(255,255,255,0.08);
     --cell-hover: rgba(255,255,255,0.1);
@@ -148,6 +151,7 @@
     --nav-hover-border: rgba(255,255,255,0.25);
     --nav-active-bg: rgba(52,211,153,0.3);
     --nav-active-border: rgba(52,211,153,0.4);
+    --nav-active-text: white;
     --cell-bg: rgba(255,255,255,0.05);
     --cell-border: rgba(255,255,255,0.08);
     --cell-hover: rgba(255,255,255,0.1);
@@ -210,7 +214,7 @@ h1, h2, h3 { color: var(--text); }
 .back-btn:hover { color: var(--text); }
 .nav-btn { background: var(--nav-bg); border-color: var(--nav-border); color: var(--text-muted); }
 .nav-btn:hover { background: var(--nav-hover); border-color: var(--nav-hover-border); }
-.nav-btn.active { background: var(--nav-active-bg); border-color: var(--nav-active-border); color: var(--text); box-shadow: 0 4px 16px var(--accent-glow); }
+.nav-btn.active { background: var(--nav-active-bg); border-color: var(--nav-active-border); color: var(--nav-active-text); box-shadow: 0 4px 16px var(--accent-glow); }
 .subtitle { color: var(--text-muted); }
 .toolbar { background: var(--toolbar-bg); border: 1px solid var(--toolbar-border); }
 .color-picker-area label { color: var(--text-muted); }
