@@ -8,10 +8,11 @@
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
     <script src="../js/firebase-init.js"></script>
+    <link rel="stylesheet" href="../css/themes.css">
+    <script src="../js/themes.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body:not(.ready) { display: none; }
         body {
             font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
             min-height: 100vh;
@@ -19,140 +20,40 @@
             flex-direction: column;
             align-items: center;
             padding: 20px 10px;
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
         }
         .app-container {
             max-width: 700px;
             width: 100%;
-            background: rgba(255,255,255,0.06);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255,255,255,0.1);
             border-radius: 28px;
             padding: 28px 24px 36px;
-            box-shadow: 0 24px 48px rgba(0,0,0,0.4);
         }
-        .top-bar {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 24px;
-        }
-        .back-btn {
-            text-decoration: none;
-            color: rgba(255,255,255,0.4);
-            font-size: 1.4rem;
-            transition: 0.15s;
-        }
-        .back-btn:hover { color: white; }
-        h1 {
-            font-weight: 700;
-            font-size: 1.5rem;
-            color: white;
-        }
-        .profile-header {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            padding: 20px;
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.06);
-            border-radius: 20px;
-            margin-bottom: 24px;
-        }
+        .top-bar { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+        .back-btn { text-decoration: none; font-size: 1.4rem; transition: 0.15s; }
+        .back-btn:hover { color: var(--text); }
+        h1 { font-weight: 700; font-size: 1.5rem; }
+        .profile-header { display: flex; align-items: center; gap: 20px; padding: 20px; border-radius: 20px; margin-bottom: 24px; }
         .avatar {
-            width: 72px;
-            height: 72px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.06);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.2rem;
-            flex-shrink: 0;
+            width: 72px; height: 72px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2.2rem; flex-shrink: 0;
         }
         .profile-info { text-align: left; }
-        .profile-name {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: white;
-        }
-        .profile-email {
-            font-size: 0.85rem;
-            color: rgba(255,255,255,0.5);
-            margin-top: 2px;
-        }
-        .profile-join {
-            font-size: 0.8rem;
-            color: rgba(255,255,255,0.3);
-            margin-top: 4px;
-        }
-        .stats-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 24px;
-        }
-        .stat-card {
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.06);
-            border-radius: 16px;
-            padding: 18px 12px;
-            text-align: center;
-        }
-        .stat-number {
-            font-size: 1.6rem;
-            font-weight: 600;
-            color: white;
-        }
-        .stat-label {
-            font-size: 0.8rem;
-            color: rgba(255,255,255,0.4);
-            margin-top: 4px;
-        }
-        .section-title {
-            font-weight: 500;
-            font-size: 1rem;
-            color: rgba(255,255,255,0.7);
-            margin-bottom: 12px;
-        }
-        .progress-list {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .progress-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .progress-item .label {
-            width: 60px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: rgba(255,255,255,0.6);
-            flex-shrink: 0;
-        }
-        .progress-bar-bg {
-            flex: 1;
-            height: 10px;
-            background: rgba(255,255,255,0.06);
-            border-radius: 20px;
-            overflow: hidden;
-        }
-        .progress-bar-fill {
-            height: 100%;
-            border-radius: 20px;
-            width: 0%;
-            transition: width 0.3s;
-        }
-        .progress-item .count {
-            font-size: 0.8rem;
-            color: rgba(255,255,255,0.4);
-            width: 50px;
-            text-align: right;
-            flex-shrink: 0;
-        }
+        .profile-name { font-size: 1.2rem; font-weight: 600; }
+        .profile-email { font-size: 0.85rem; margin-top: 2px; }
+        .profile-join { font-size: 0.8rem; margin-top: 4px; }
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+        .stat-card { border-radius: 16px; padding: 18px 12px; text-align: center; }
+        .stat-number { font-size: 1.6rem; font-weight: 600; }
+        .stat-label { font-size: 0.8rem; margin-top: 4px; }
+        .section-title { font-weight: 500; font-size: 1rem; margin-bottom: 12px; }
+        .progress-list { display: flex; flex-direction: column; gap: 10px; }
+        .progress-item { display: flex; align-items: center; gap: 12px; }
+        .progress-item .label { width: 60px; font-size: 0.85rem; font-weight: 500; flex-shrink: 0; }
+        .progress-bar-bg { flex: 1; height: 10px; border-radius: 20px; overflow: hidden; }
+        .progress-bar-fill { height: 100%; border-radius: 20px; width: 0%; transition: width 0.3s; }
+        .progress-item .count { font-size: 0.8rem; width: 50px; text-align: right; flex-shrink: 0; }
         @media (max-width: 500px) {
             .stats-grid { grid-template-columns: 1fr 1fr; }
             .profile-header { flex-direction: column; text-align: center; }

@@ -7,18 +7,13 @@
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <link rel="stylesheet" href="../css/themes.css">
     <script src="../js/firebase-init.js"></script>
+    <script src="../js/themes.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-        * {
-            box-sizing: border-box;
-            user-select: none;
-            margin: 0;
-            padding: 0;
-        }
-        body:not(.ready) { display: none; }
+        * { box-sizing: border-box; user-select: none; margin: 0; padding: 0; }
         body {
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
             font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
             min-height: 100vh;
             display: flex;
@@ -29,78 +24,28 @@
         .app-container {
             max-width: 1350px;
             width: 100%;
-            background: rgba(255,255,255,0.06);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255,255,255,0.1);
             border-radius: 28px;
             padding: 24px 20px 30px;
-            box-shadow: 0 24px 48px rgba(0,0,0,0.4);
         }
-        .top-bar {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 6px;
-        }
-        .back-btn {
-            text-decoration: none;
-            color: rgba(255,255,255,0.4);
-            font-size: 1.4rem;
-            transition: 0.15s;
-        }
-        .back-btn:hover {
-            color: white;
-        }
-        h1 {
-            font-weight: 700;
-            font-size: 1.7rem;
-            margin: 0 0 6px 0;
-            color: white;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-        .h1-sub {
-            font-size: 1rem;
-            font-weight: 400;
-            color: rgba(255,255,255,0.4);
-            margin-left: auto;
-        }
-        .nav-bar {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 16px;
-            padding-bottom: 16px;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-            justify-content: center;
-        }
+        .top-bar { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
+        .back-btn { text-decoration: none; font-size: 1.4rem; transition: 0.15s; }
+        .back-btn:hover { color: var(--text); }
+        h1 { font-weight: 700; font-size: 1.7rem; margin: 0 0 6px 0; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+        .h1-sub { font-size: 1rem; font-weight: 400; margin-left: auto; }
+        .nav-bar { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; padding-bottom: 16px; justify-content: center; }
         .nav-btn {
             padding: 10px 20px;
-            border: 1px solid rgba(255,255,255,0.12);
             border-radius: 40px;
-            background: rgba(255,255,255,0.04);
             cursor: pointer;
             font-weight: 600;
             font-size: 0.95rem;
-            color: rgba(255,255,255,0.6);
             transition: all 0.2s;
             min-width: 70px;
             text-align: center;
         }
-        .nav-btn:hover {
-            background: rgba(255,255,255,0.08);
-            border-color: rgba(255,255,255,0.25);
-            transform: translateY(-2px);
-        }
-        .nav-btn.active {
-            background: rgba(99,102,241,0.3);
-            border-color: rgba(99,102,241,0.4);
-            color: white;
-            box-shadow: 0 4px 16px rgba(99,102,241,0.2);
-        }
+        .nav-btn:hover { transform: translateY(-2px); }
         .nav-btn .level-badge {
             display: inline-block;
             width: 10px;

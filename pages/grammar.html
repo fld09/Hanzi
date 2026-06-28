@@ -7,10 +7,11 @@
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
     <script src="../js/firebase-init.js"></script>
+    <link rel="stylesheet" href="../css/themes.css">
+    <script src="../js/themes.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body:not(.ready) { display: none; }
         body {
             font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
             min-height: 100vh;
@@ -18,41 +19,19 @@
             flex-direction: column;
             align-items: center;
             padding: 20px 10px;
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
         }
         .app-container {
             max-width: 900px;
             width: 100%;
-            background: rgba(255,255,255,0.06);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255,255,255,0.1);
             border-radius: 28px;
             padding: 24px 20px 30px;
-            box-shadow: 0 24px 48px rgba(0,0,0,0.4);
         }
-        .top-bar {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 16px;
-        }
-        .back-btn {
-            text-decoration: none;
-            color: rgba(255,255,255,0.4);
-            font-size: 1.4rem;
-            transition: 0.15s;
-        }
-        .back-btn:hover { color: white; }
-        h1 {
-            font-weight: 700;
-            font-size: 1.7rem;
-            color: white;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
+        .top-bar { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+        .back-btn { text-decoration: none; font-size: 1.4rem; transition: 0.15s; }
+        .back-btn:hover { color: var(--text); }
+        h1 { font-weight: 700; font-size: 1.7rem; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
         .nav-bar {
             display: flex;
             flex-wrap: wrap;

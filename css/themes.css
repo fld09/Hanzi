@@ -1,0 +1,258 @@
+/* === Темы оформления === */
+:root {
+    --bg: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    --card-bg: rgba(255,255,255,0.06);
+    --card-border: rgba(255,255,255,0.1);
+    --text: white;
+    --text-muted: rgba(255,255,255,0.5);
+    --text-dim: rgba(255,255,255,0.3);
+    --accent: #6366f1;
+    --accent-glow: rgba(99,102,241,0.3);
+    --accent-light: #a5b4fc;
+    --input-bg: rgba(255,255,255,0.05);
+    --input-border: rgba(255,255,255,0.12);
+    --card-hover: rgba(255,255,255,0.08);
+    --card-hover-border: rgba(255,255,255,0.2);
+    --nav-bg: rgba(255,255,255,0.04);
+    --nav-border: rgba(255,255,255,0.12);
+    --nav-hover: rgba(255,255,255,0.08);
+    --nav-hover-border: rgba(255,255,255,0.25);
+    --nav-active-bg: rgba(99,102,241,0.3);
+    --nav-active-border: rgba(99,102,241,0.4);
+    --cell-bg: rgba(255,255,255,0.05);
+    --cell-border: rgba(255,255,255,0.08);
+    --cell-hover: rgba(255,255,255,0.1);
+    --cell-hover-border: rgba(255,255,255,0.25);
+    --toolbar-bg: rgba(255,255,255,0.04);
+    --toolbar-border: rgba(255,255,255,0.06);
+    --stat-bg: rgba(255,255,255,0.06);
+    --stat-border: rgba(255,255,255,0.06);
+    --progress-bg: rgba(255,255,255,0.06);
+    --topic-bg: rgba(255,255,255,0.04);
+    --topic-border: rgba(255,255,255,0.08);
+    --topic-hover-border: rgba(255,255,255,0.2);
+    --example-bg: rgba(255,255,255,0.04);
+    --example-border: rgba(255,255,255,0.08);
+    --popup-bg: rgba(30,27,75,0.95);
+    --btn-bg: linear-gradient(135deg, #6366f1, #a855f7);
+    --btn-shadow: rgba(99,102,241,0.3);
+    --gradient-text: linear-gradient(135deg, #c084fc, #6366f1);
+    --gradient-accent: linear-gradient(135deg, #6366f1, #a855f7);
+}
+
+/* Тема: Dawn (светлая) */
+.theme-dawn {
+    --bg: linear-gradient(135deg, #f8fafc, #e2e8f0, #cbd5e1);
+    --card-bg: rgba(255,255,255,0.85);
+    --card-border: rgba(0,0,0,0.06);
+    --text: #1e293b;
+    --text-muted: #64748b;
+    --text-dim: #94a3b8;
+    --accent: #6366f1;
+    --accent-glow: rgba(99,102,241,0.15);
+    --accent-light: #4f46e5;
+    --input-bg: white;
+    --input-border: #e2e8f0;
+    --card-hover: white;
+    --card-hover-border: #94a3b8;
+    --nav-bg: rgba(0,0,0,0.03);
+    --nav-border: #e2e8f0;
+    --nav-hover: rgba(0,0,0,0.04);
+    --nav-hover-border: #94a3b8;
+    --nav-active-bg: #1e293b;
+    --nav-active-border: #1e293b;
+    --cell-bg: white;
+    --cell-border: #e2e8f0;
+    --cell-hover: #f8fafc;
+    --cell-hover-border: #94a3b8;
+    --toolbar-bg: rgba(0,0,0,0.03);
+    --toolbar-border: #e2e8f0;
+    --stat-bg: white;
+    --stat-border: #e2e8f0;
+    --progress-bg: #e2e8f0;
+    --topic-bg: #f8fafc;
+    --topic-border: #e2e8f0;
+    --topic-hover-border: #94a3b8;
+    --example-bg: white;
+    --example-border: #e2e8f0;
+    --popup-bg: rgba(30,41,59,0.95);
+    --btn-bg: linear-gradient(135deg, #6366f1, #4f46e5);
+    --btn-shadow: rgba(99,102,241,0.3);
+    --gradient-text: linear-gradient(135deg, #6366f1, #4f46e5);
+    --gradient-accent: linear-gradient(135deg, #6366f1, #4f46e5);
+}
+
+/* Тема: Ocean */
+.theme-ocean {
+    --bg: linear-gradient(135deg, #0c4a6e, #1e3a5f, #0f2b45);
+    --card-bg: rgba(255,255,255,0.06);
+    --card-border: rgba(255,255,255,0.1);
+    --text: white;
+    --text-muted: rgba(255,255,255,0.5);
+    --text-dim: rgba(255,255,255,0.3);
+    --accent: #38bdf8;
+    --accent-glow: rgba(56,189,248,0.3);
+    --accent-light: #7dd3fc;
+    --input-bg: rgba(255,255,255,0.05);
+    --input-border: rgba(255,255,255,0.12);
+    --card-hover: rgba(255,255,255,0.08);
+    --card-hover-border: rgba(255,255,255,0.2);
+    --nav-bg: rgba(255,255,255,0.04);
+    --nav-border: rgba(255,255,255,0.12);
+    --nav-hover: rgba(255,255,255,0.08);
+    --nav-hover-border: rgba(255,255,255,0.25);
+    --nav-active-bg: rgba(56,189,248,0.3);
+    --nav-active-border: rgba(56,189,248,0.4);
+    --cell-bg: rgba(255,255,255,0.05);
+    --cell-border: rgba(255,255,255,0.08);
+    --cell-hover: rgba(255,255,255,0.1);
+    --cell-hover-border: rgba(255,255,255,0.25);
+    --toolbar-bg: rgba(255,255,255,0.04);
+    --toolbar-border: rgba(255,255,255,0.06);
+    --stat-bg: rgba(255,255,255,0.06);
+    --stat-border: rgba(255,255,255,0.06);
+    --progress-bg: rgba(255,255,255,0.06);
+    --topic-bg: rgba(255,255,255,0.04);
+    --topic-border: rgba(255,255,255,0.08);
+    --topic-hover-border: rgba(255,255,255,0.2);
+    --example-bg: rgba(255,255,255,0.04);
+    --example-border: rgba(255,255,255,0.08);
+    --popup-bg: rgba(15,42,69,0.95);
+    --btn-bg: linear-gradient(135deg, #38bdf8, #818cf8);
+    --btn-shadow: rgba(56,189,248,0.3);
+    --gradient-text: linear-gradient(135deg, #7dd3fc, #38bdf8);
+    --gradient-accent: linear-gradient(135deg, #38bdf8, #818cf8);
+}
+
+/* Тема: Forest */
+.theme-forest {
+    --bg: linear-gradient(135deg, #064e3b, #0f3a2e, #1a2e2a);
+    --card-bg: rgba(255,255,255,0.06);
+    --card-border: rgba(255,255,255,0.1);
+    --text: white;
+    --text-muted: rgba(255,255,255,0.5);
+    --text-dim: rgba(255,255,255,0.3);
+    --accent: #34d399;
+    --accent-glow: rgba(52,211,153,0.3);
+    --accent-light: #6ee7b7;
+    --input-bg: rgba(255,255,255,0.05);
+    --input-border: rgba(255,255,255,0.12);
+    --card-hover: rgba(255,255,255,0.08);
+    --card-hover-border: rgba(255,255,255,0.2);
+    --nav-bg: rgba(255,255,255,0.04);
+    --nav-border: rgba(255,255,255,0.12);
+    --nav-hover: rgba(255,255,255,0.08);
+    --nav-hover-border: rgba(255,255,255,0.25);
+    --nav-active-bg: rgba(52,211,153,0.3);
+    --nav-active-border: rgba(52,211,153,0.4);
+    --cell-bg: rgba(255,255,255,0.05);
+    --cell-border: rgba(255,255,255,0.08);
+    --cell-hover: rgba(255,255,255,0.1);
+    --cell-hover-border: rgba(255,255,255,0.25);
+    --toolbar-bg: rgba(255,255,255,0.04);
+    --toolbar-border: rgba(255,255,255,0.06);
+    --stat-bg: rgba(255,255,255,0.06);
+    --stat-border: rgba(255,255,255,0.06);
+    --progress-bg: rgba(255,255,255,0.06);
+    --topic-bg: rgba(255,255,255,0.04);
+    --topic-border: rgba(255,255,255,0.08);
+    --topic-hover-border: rgba(255,255,255,0.2);
+    --example-bg: rgba(255,255,255,0.04);
+    --example-border: rgba(255,255,255,0.08);
+    --popup-bg: rgba(6,78,59,0.95);
+    --btn-bg: linear-gradient(135deg, #34d399, #10b981);
+    --btn-shadow: rgba(52,211,153,0.3);
+    --gradient-text: linear-gradient(135deg, #6ee7b7, #34d399);
+    --gradient-accent: linear-gradient(135deg, #34d399, #10b981);
+}
+
+/* === Переключатель тем === */
+.theme-switcher {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    gap: 6px;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 40px;
+    padding: 6px 10px;
+}
+.theme-dot {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+}
+.theme-dot:hover { transform: scale(1.2); }
+.theme-dot.active { border-color: white; box-shadow: 0 0 12px rgba(255,255,255,0.3); }
+.theme-dot[data-theme="night"] { background: linear-gradient(135deg, #302b63, #24243e); }
+.theme-dot[data-theme="dawn"] { background: linear-gradient(135deg, #f8fafc, #e2e8f0); border-color: #94a3b8; }
+.theme-dot[data-theme="ocean"] { background: linear-gradient(135deg, #0c4a6e, #38bdf8); }
+.theme-dot[data-theme="forest"] { background: linear-gradient(135deg, #064e3b, #34d399); }
+
+/* === Встроенные стили с использованием переменных === */
+body { background: var(--bg); color: var(--text); }
+body:not(.ready) { display: none; }
+.app-container { background: var(--card-bg); border: 1px solid var(--card-border); box-shadow: 0 24px 48px rgba(0,0,0,0.4); }
+h1, h2, h3 { color: var(--text); }
+.site-desc { color: var(--text-muted); }
+.back-btn { color: var(--text-dim); }
+.back-btn:hover { color: var(--text); }
+.nav-btn { background: var(--nav-bg); border-color: var(--nav-border); color: var(--text-muted); }
+.nav-btn:hover { background: var(--nav-hover); border-color: var(--nav-hover-border); }
+.nav-btn.active { background: var(--nav-active-bg); border-color: var(--nav-active-border); color: var(--text); box-shadow: 0 4px 16px var(--accent-glow); }
+.subtitle { color: var(--text-muted); }
+.toolbar { background: var(--toolbar-bg); border: 1px solid var(--toolbar-border); }
+.color-picker-area label { color: var(--text-muted); }
+input[type="color"] { background: var(--input-bg); border-color: var(--input-border); }
+.stats { color: var(--text-muted); }
+.stats span { background: var(--stat-bg); border: 1px solid var(--stat-border); color: var(--text-muted); }
+.btn-reset { background: var(--stat-bg); border-color: var(--input-border); color: var(--text-muted); }
+.btn-reset:hover { background: var(--card-hover); border-color: var(--card-hover-border); color: var(--text); }
+.cell { background: var(--cell-bg); border-color: var(--cell-border); color: var(--text); }
+.cell:hover { background: var(--cell-hover); border-color: var(--cell-hover-border); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+.cell.colored { border-color: var(--cell-hover-border); }
+.footer-hint { color: var(--text-dim); border-top-color: var(--toolbar-border); }
+.progress-bar-bg { background: var(--progress-bg); }
+.progress-item .label { color: var(--text-muted); }
+.progress-item .count { color: var(--text-dim); }
+.stat-card { background: var(--toolbar-bg); border-color: var(--toolbar-border); }
+.stat-label { color: var(--text-dim); }
+.section-title { color: var(--text-muted); }
+.topic { background: var(--topic-bg); border-color: var(--topic-border); }
+.topic:hover { border-color: var(--topic-hover-border); }
+.topic-title { color: var(--text); }
+.topic-explain { color: var(--text-muted); }
+.topic-toggle { color: var(--text-dim); }
+.topic-examples { background: var(--example-bg); border-color: var(--example-border); }
+.topic-examples .ex .cn { color: var(--text); }
+.topic-examples .ex .ru { color: var(--text-muted); }
+.empty-state { color: var(--text-dim); }
+.trans-popup { background: var(--popup-bg); border-color: var(--card-border); color: var(--text); }
+.trans-popup .ru { color: var(--text-muted); }
+.trans-popup .loading { color: var(--text-dim); }
+.speaker, .trans-btn { background: var(--popup-bg); }
+.speaker.playing { color: var(--accent-light); }
+.voice-select { background: var(--input-bg); border-color: var(--input-border); color: var(--text-muted); }
+.field label { color: var(--text-muted); }
+.field input { background: var(--input-bg); border-color: var(--input-border); color: var(--text); }
+.field input::placeholder { color: var(--text-dim); }
+.field input:focus { border-color: var(--accent); background: var(--card-hover); }
+.link { color: var(--text-dim); }
+.link a { color: var(--accent-light); }
+.error { color: #f87171; }
+.back { color: var(--text-dim); }
+.back:hover { color: var(--text-muted); }
+.profile-header { background: var(--toolbar-bg); border-color: var(--toolbar-border); }
+.profile-email { color: var(--text-muted); }
+.profile-join { color: var(--text-dim); }
+.profile-name { color: var(--text); }
+.avatar { background: var(--nav-bg); }
+.nav-bar { border-bottom-color: var(--toolbar-border); }

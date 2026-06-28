@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hanzi — Регистрация</title>
+    <link rel="stylesheet" href="../css/themes.css">
+    <script src="../js/themes.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -14,45 +16,38 @@
             align-items: center;
             justify-content: center;
             padding: 20px 10px;
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
         }
         .card {
             max-width: 400px;
             width: 100%;
-            background: rgba(255,255,255,0.06);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255,255,255,0.1);
             border-radius: 28px;
             padding: 36px 28px;
-            box-shadow: 0 24px 48px rgba(0,0,0,0.4);
             text-align: center;
         }
-        h1 { font-weight: 700; font-size: 1.8rem; color: white; margin-bottom: 4px; }
-        h1 span { background: linear-gradient(135deg, #c084fc, #6366f1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .sub { color: rgba(255,255,255,0.5); font-size: 0.9rem; margin-bottom: 24px; }
+        h1 { font-weight: 700; font-size: 1.8rem; margin-bottom: 4px; }
+        h1 span { background: var(--gradient-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .sub { font-size: 0.9rem; margin-bottom: 24px; }
         .field { margin-bottom: 14px; text-align: left; }
-        .field label { display: block; font-weight: 500; font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-bottom: 4px; }
+        .field label { display: block; font-weight: 500; font-size: 0.85rem; margin-bottom: 4px; }
         .field input {
-            width: 100%; padding: 12px 16px; border: 1px solid rgba(255,255,255,0.12); border-radius: 14px;
+            width: 100%; padding: 12px 16px; border-radius: 14px;
             font-size: 0.95rem; outline: none; transition: 0.15s;
-            background: rgba(255,255,255,0.05); color: white;
         }
-        .field input::placeholder { color: rgba(255,255,255,0.25); }
-        .field input:focus { border-color: rgba(99,102,241,0.5); background: rgba(255,255,255,0.08); }
+        .field input::placeholder { color: var(--text-dim); }
         .btn {
             width: 100%; padding: 12px; border: none; border-radius: 40px; font-size: 1rem;
             font-weight: 600; cursor: pointer; transition: 0.15s; margin-top: 6px;
-            background: linear-gradient(135deg, #6366f1, #a855f7); color: white;
+            background: var(--btn-bg); color: white;
         }
-        .btn:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(99,102,241,0.3); }
+        .btn:hover { transform: translateY(-1px); box-shadow: 0 8px 24px var(--btn-shadow); }
         .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-        .link { margin-top: 16px; font-size: 0.85rem; color: rgba(255,255,255,0.4); }
-        .link a { color: #a5b4fc; text-decoration: none; font-weight: 500; }
+        .link { margin-top: 16px; font-size: 0.85rem; }
+        .link a { text-decoration: none; font-weight: 500; }
         .link a:hover { text-decoration: underline; }
         .error { color: #f87171; font-size: 0.85rem; margin-top: 10px; min-height: 1.2em; }
-        .back { display: inline-block; margin-bottom: 16px; text-decoration: none; color: rgba(255,255,255,0.3); font-size: 0.85rem; }
-        .back:hover { color: rgba(255,255,255,0.6); }
+        .back { display: inline-block; margin-bottom: 16px; text-decoration: none; font-size: 0.85rem; }
         @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         .card { animation: fadeUp 0.5s ease; }
     </style>
