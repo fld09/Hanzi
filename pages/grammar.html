@@ -8,28 +8,28 @@
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
     <script src="../js/firebase-init.js"></script>
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body:not(.ready) { display: none; }
         body {
-            background: #f1f5f9;
-            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             padding: 20px 10px;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
         }
         .app-container {
             max-width: 900px;
             width: 100%;
-            background: white;
+            background: rgba(255,255,255,0.06);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255,255,255,0.1);
             border-radius: 28px;
             padding: 24px 20px 30px;
-            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+            box-shadow: 0 24px 48px rgba(0,0,0,0.4);
         }
         .top-bar {
             display: flex;
@@ -39,17 +39,15 @@
         }
         .back-btn {
             text-decoration: none;
-            color: #475569;
+            color: rgba(255,255,255,0.4);
             font-size: 1.4rem;
             transition: 0.15s;
         }
-        .back-btn:hover {
-            color: #1e293b;
-        }
+        .back-btn:hover { color: white; }
         h1 {
-            font-weight: 500;
+            font-weight: 700;
             font-size: 1.7rem;
-            color: #1e293b;
+            color: white;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -61,32 +59,32 @@
             gap: 8px;
             margin-bottom: 20px;
             padding-bottom: 16px;
-            border-bottom: 2px solid #e9edf2;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
             justify-content: center;
         }
         .nav-btn {
             padding: 10px 20px;
-            border: 2px solid #e2e8f0;
+            border: 1px solid rgba(255,255,255,0.12);
             border-radius: 40px;
-            background: white;
+            background: rgba(255,255,255,0.04);
             cursor: pointer;
             font-weight: 600;
             font-size: 0.95rem;
-            color: #475569;
+            color: rgba(255,255,255,0.6);
             transition: all 0.2s;
             min-width: 70px;
             text-align: center;
         }
         .nav-btn:hover {
-            background: #f1f5f9;
-            border-color: #94a3b8;
+            background: rgba(255,255,255,0.08);
+            border-color: rgba(255,255,255,0.25);
             transform: translateY(-2px);
         }
         .nav-btn.active {
-            background: #1e293b;
-            border-color: #1e293b;
+            background: rgba(99,102,241,0.3);
+            border-color: rgba(99,102,241,0.4);
             color: white;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 16px rgba(99,102,241,0.2);
         }
         .nav-btn .level-badge {
             display: inline-block;
@@ -101,14 +99,14 @@
             gap: 16px;
         }
         .topic {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
             border-radius: 16px;
             cursor: pointer;
             transition: 0.2s;
         }
         .topic:hover {
-            border-color: #94a3b8;
+            border-color: rgba(255,255,255,0.2);
         }
         .topic-header {
             display: flex;
@@ -120,11 +118,11 @@
         .topic-title {
             font-size: 1.1rem;
             font-weight: 600;
-            color: #1e293b;
+            color: white;
         }
         .topic-toggle {
             font-size: 0.9rem;
-            color: #94a3b8;
+            color: rgba(255,255,255,0.3);
             transition: transform 0.2s;
             flex-shrink: 0;
         }
@@ -150,16 +148,16 @@
             padding: 0 20px 20px;
         }
         .topic-explain {
-            color: #475569;
+            color: rgba(255,255,255,0.6);
             font-size: 0.93rem;
             line-height: 1.6;
             margin-bottom: 10px;
         }
         .topic-examples {
-            background: white;
+            background: rgba(255,255,255,0.04);
             border-radius: 12px;
             padding: 12px 16px;
-            border: 1px solid #e2e8f0;
+            border: 1px solid rgba(255,255,255,0.08);
             margin-top: 10px;
         }
         .topic-examples .ex {
@@ -171,15 +169,15 @@
         }
         .topic-examples .ex .cn {
             font-weight: 500;
-            color: #1e293b;
+            color: white;
         }
         .topic-examples .ex .ru {
-            color: #64748b;
+            color: rgba(255,255,255,0.5);
         }
         .empty-state {
             text-align: center;
             padding: 60px 20px;
-            color: #94a3b8;
+            color: rgba(255,255,255,0.3);
             font-size: 1rem;
         }
         @media (max-width: 600px) {
@@ -196,7 +194,7 @@
 <div class="app-container">
     <div class="top-bar">
         <a class="back-btn" href="../index.html">←</a>
-        <h1>📖 Грамматика</h1>
+        <h1>📖 <span style="background:linear-gradient(135deg,#c084fc,#6366f1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Грамматика</span></h1>
     </div>
 
     <nav class="nav-bar" id="navBar"></nav>

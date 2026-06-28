@@ -9,6 +9,7 @@
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
     <script src="../js/firebase-init.js"></script>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         * {
             box-sizing: border-box;
             user-select: none;
@@ -17,8 +18,8 @@
         }
         body:not(.ready) { display: none; }
         body {
-            background: #f1f5f9;
-            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -28,10 +29,13 @@
         .app-container {
             max-width: 1350px;
             width: 100%;
-            background: white;
+            background: rgba(255,255,255,0.06);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255,255,255,0.1);
             border-radius: 28px;
             padding: 24px 20px 30px;
-            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+            box-shadow: 0 24px 48px rgba(0,0,0,0.4);
         }
         .top-bar {
             display: flex;
@@ -41,18 +45,18 @@
         }
         .back-btn {
             text-decoration: none;
-            color: #475569;
+            color: rgba(255,255,255,0.4);
             font-size: 1.4rem;
             transition: 0.15s;
         }
         .back-btn:hover {
-            color: #1e293b;
+            color: white;
         }
         h1 {
-            font-weight: 500;
+            font-weight: 700;
             font-size: 1.7rem;
             margin: 0 0 6px 0;
-            color: #1e293b;
+            color: white;
             display: flex;
             align-items: center;
             gap: 12px;
@@ -61,7 +65,7 @@
         .h1-sub {
             font-size: 1rem;
             font-weight: 400;
-            color: #475569;
+            color: rgba(255,255,255,0.4);
             margin-left: auto;
         }
         .nav-bar {
@@ -70,32 +74,32 @@
             gap: 8px;
             margin-bottom: 16px;
             padding-bottom: 16px;
-            border-bottom: 2px solid #e9edf2;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
             justify-content: center;
         }
         .nav-btn {
             padding: 10px 20px;
-            border: 2px solid #e2e8f0;
+            border: 1px solid rgba(255,255,255,0.12);
             border-radius: 40px;
-            background: white;
+            background: rgba(255,255,255,0.04);
             cursor: pointer;
             font-weight: 600;
             font-size: 0.95rem;
-            color: #475569;
+            color: rgba(255,255,255,0.6);
             transition: all 0.2s;
             min-width: 70px;
             text-align: center;
         }
         .nav-btn:hover {
-            background: #f1f5f9;
-            border-color: #94a3b8;
+            background: rgba(255,255,255,0.08);
+            border-color: rgba(255,255,255,0.25);
             transform: translateY(-2px);
         }
         .nav-btn.active {
-            background: #1e293b;
-            border-color: #1e293b;
+            background: rgba(99,102,241,0.3);
+            border-color: rgba(99,102,241,0.4);
             color: white;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 16px rgba(99,102,241,0.2);
         }
         .nav-btn .level-badge {
             display: inline-block;
@@ -105,7 +109,7 @@
             margin-right: 6px;
         }
         .subtitle {
-            color: #475569;
+            color: rgba(255,255,255,0.6);
             font-size: 1rem;
             margin-bottom: 20px;
             padding-left: 16px;
@@ -119,7 +123,8 @@
             flex-wrap: wrap;
             gap: 16px;
             margin-bottom: 24px;
-            background: #f1f5f9;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.06);
             padding: 12px 18px;
             border-radius: 60px;
         }
@@ -130,24 +135,25 @@
         }
         .color-picker-area label {
             font-weight: 500;
-            color: #1e293b;
+            color: rgba(255,255,255,0.6);
         }
         .voice-select {
             padding: 6px 12px;
-            border: 2px solid #e2e8f0;
+            border: 1px solid rgba(255,255,255,0.15);
             border-radius: 40px;
             font-size: 0.85rem;
-            background: white;
-            color: #1e293b;
+            background: rgba(255,255,255,0.06);
+            color: rgba(255,255,255,0.7);
             cursor: pointer;
             max-width: 160px;
         }
+        .voice-select option { background: #1e1b4b; color: white; }
         input[type="color"] {
             width: 44px;
             height: 44px;
-            border: 2px solid #cbd5e1;
+            border: 2px solid rgba(255,255,255,0.15);
             border-radius: 40px;
-            background: white;
+            background: rgba(255,255,255,0.05);
             cursor: pointer;
             padding: 2px;
         }
@@ -162,29 +168,30 @@
             display: flex;
             align-items: center;
             gap: 18px;
-            color: #1e293b;
+            color: rgba(255,255,255,0.7);
             font-size: 0.95rem;
         }
         .stats span {
-            background: white;
+            background: rgba(255,255,255,0.06);
             padding: 6px 16px;
             border-radius: 30px;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+            border: 1px solid rgba(255,255,255,0.06);
         }
         .btn-reset {
-            background: white;
-            border: 1px solid #e2e8f0;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
             padding: 8px 20px;
             border-radius: 40px;
             font-weight: 500;
             cursor: pointer;
-            color: #1e293b;
+            color: rgba(255,255,255,0.6);
             transition: 0.15s;
             font-size: 0.9rem;
         }
         .btn-reset:hover {
-            background: #f1f5f9;
-            border-color: #94a3b8;
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.25);
+            color: white;
         }
         .grid {
             display: grid;
@@ -194,18 +201,18 @@
         }
         .cell {
             aspect-ratio: 1 / 1;
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
             border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.6rem;
             font-weight: 500;
-            color: #0f172a;
+            color: white;
             cursor: pointer;
             transition: background 0.15s, box-shadow 0.1s, transform 0.1s;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             padding: 0 2px;
             word-break: break-all;
             position: relative;
@@ -216,7 +223,7 @@
             right: 4px;
             font-size: 0.75rem;
             cursor: pointer;
-            background: rgba(255,255,255,0.85);
+            background: rgba(30,27,75,0.85);
             border-radius: 50%;
             width: 20px;
             height: 20px;
@@ -234,7 +241,7 @@
             transform: scale(1.2);
         }
         .cell .speaker.playing {
-            color: #4f46e5;
+            color: #a5b4fc;
         }
         .cell .trans-btn {
             position: absolute;
@@ -242,7 +249,7 @@
             left: 4px;
             font-size: 0.7rem;
             cursor: pointer;
-            background: rgba(255,255,255,0.85);
+            background: rgba(30,27,75,0.85);
             border-radius: 50%;
             width: 20px;
             height: 20px;
@@ -264,14 +271,16 @@
         }
         .trans-popup {
             position: fixed;
-            background: #1e293b;
+            background: rgba(30,27,75,0.95);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.1);
             color: white;
             padding: 10px 16px;
             border-radius: 12px;
             font-size: 0.9rem;
             z-index: 1000;
             max-width: 280px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+            box-shadow: 0 16px 32px rgba(0,0,0,0.4);
             pointer-events: none;
             opacity: 0;
             transition: opacity 0.2s;
@@ -292,21 +301,21 @@
             font-size: 0.8rem;
         }
         .cell:hover {
-            background: #f8fafc;
-            border-color: #94a3b8;
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.25);
             transform: scale(1.02);
             z-index: 2;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
         }
         .cell.colored {
-            border-color: #cbd5e1;
+            border-color: rgba(255,255,255,0.3);
         }
         .footer-hint {
             margin-top: 24px;
             font-size: 0.9rem;
-            color: #64748b;
+            color: rgba(255,255,255,0.3);
             text-align: center;
-            border-top: 1px solid #e9edf2;
+            border-top: 1px solid rgba(255,255,255,0.06);
             padding-top: 20px;
         }
         @media (max-width: 600px) {
@@ -341,8 +350,8 @@
     <div class="top-bar">
         <a class="back-btn" href="../index.html">←</a>
         <h1>
-            <span>📚 HSK 3.0</span>
-            <span class="h1-sub">Все уровни · иероглифы</span>
+            <span>📚 <span style="background:linear-gradient(135deg,#c084fc,#6366f1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Hanzi</span></span>
+            <span class="h1-sub">Мои отметки</span>
         </h1>
     </div>
 
