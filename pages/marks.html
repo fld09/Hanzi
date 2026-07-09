@@ -89,6 +89,7 @@
         .cell:hover { transform: scale(1.02); z-index: 2; box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
         .cell.colored { border-color: var(--cell-hover-border); }
         .footer-hint { margin-top: 24px; font-size: 0.9rem; text-align: center; border-top: 1px solid var(--toolbar-border); padding-top: 20px; }
+        #searchInput::placeholder { color: var(--text-dim); }
         @media (max-width: 600px) {
             .grid {
                 grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
@@ -142,6 +143,9 @@
         </div>
     </div>
 
+    <div style="margin-bottom:12px;position:relative;">
+        <input type="text" id="searchInput" placeholder="🔍 Поиск слова..." style="width:100%;padding:10px 16px;border:1px solid var(--input-border);border-radius:14px;font-size:0.9rem;outline:none;background:var(--input-bg);color:var(--text);">
+    </div>
     <div class="grid" id="gridContainer"></div>
     <div class="footer-hint">
         ⚡ Клик — закрасить · 🔊 озвучить · 🌐 перевод
@@ -161,6 +165,7 @@
     const navBar = document.getElementById('navBar');
     const subtitle = document.getElementById('subtitle');
     const grid = document.getElementById('gridContainer');
+    var searchInput = document.getElementById('searchInput');
     const counterSpan = document.getElementById('counter');
     const totalSpan = document.getElementById('totalCells');
     const resetBtn = document.getElementById('resetBtn');
@@ -291,9 +296,11 @@
     }
 
     function render() {
+        var filter = searchInput ? searchInput.value : '';
         const data = HSK_DATA[currentLevel];
         grid.innerHTML = '';
         data.words.forEach((word, idx) => {
+            if (filter && word.indexOf(filter) === -1) return;
             const cell = document.createElement('div');
             cell.className = 'cell';
             if (coloredState[currentLevel] && coloredState[currentLevel][idx]) {
@@ -411,6 +418,10 @@
         applyColorToAllColored(currentColor);
         saveState();
     });
+
+    if (searchInput) {
+        searchInput.addEventListener('input', function() { render(); });
+    }
 
     resetBtn.addEventListener('click', resetAll);
 
