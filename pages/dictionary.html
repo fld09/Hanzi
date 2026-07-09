@@ -96,11 +96,6 @@
     var initMessage = document.getElementById('initMessage');
     var voiceBtn = document.getElementById('voiceBtn');
 
-    var levelColors = {};
-    Object.keys(HSK_DATA).forEach(function(id) {
-        levelColors[HSK_DATA[id].name] = HSK_DATA[id].color;
-    });
-
     function findLevels(word) {
         var found = [];
         Object.keys(HSK_DATA).forEach(function(id) {
@@ -115,40 +110,39 @@
         if (!word.trim()) return;
         initMessage.style.display = 'none';
 
-        fetch('https://translate.googleapis.com/translate_a/single?client=gtx&sl=zh-CN&tl=ru&dt=t&dt=rm&q=' + encodeURIComponent(word))
+        var levels = findLevels(word);
+
+        resultWord.textContent = word;
+
+        if (levels.length > 0) {
+            resultLevels.innerHTML = '';
+            levels.forEach(function(l) {
+                var tag = document.createElement('span');
+                tag.className = 'level-tag';
+                tag.style.background = l.color;
+                tag.textContent = l.name;
+                resultLevels.appendChild(tag);
+            });
+        } else {
+            resultLevels.innerHTML = '<span style="font-size:0.8rem;color:var(--text-dim);">Нет в базе HSK</span>';
+        }
+
+        resultTrans.textContent = 'Загрузка...';
+
+        fetch('https://translate.googleapis.com/translate_a/single?client=gtx&sl=zh-CN&tl=ru&dt=t&q=' + encodeURIComponent(word))
             .then(function(r) { return r.json(); })
             .then(function(d) {
                 var t = '—';
                 try { t = d[0][0][0] || '—'; } catch(e) {}
-                var p = '';
-                try { p = d[0][1][3] || ''; } catch(e) {}
-
-                resultWord.textContent = word;
-                resultPinyin.textContent = p || '';
                 resultTrans.textContent = t;
-                resultCard.classList.add('show');
-
-                var levels = findLevels(word);
-                resultLevels.innerHTML = '';
-                levels.forEach(function(l) {
-                    var tag = document.createElement('span');
-                    tag.className = 'level-tag';
-                    tag.style.background = l.color;
-                    tag.textContent = l.name;
-                    resultLevels.appendChild(tag);
-                });
-
-                voiceBtn.style.display = '';
             })
             .catch(function() {
-                var levels = findLevels(word);
-                resultWord.textContent = word;
-                resultPinyin.textContent = '';
-                resultTrans.textContent = levels.length > 0 ? 'Найдено в: ' + levels.map(function(l) { return l.name; }).join(', ') : 'Не найдено';
-                resultCard.classList.add('show');
-                resultLevels.innerHTML = '';
-                voiceBtn.style.display = 'none';
+                if (levels.length > 0) resultTrans.textContent = 'Найдено в HSK, перевод недоступен';
+                else resultTrans.textContent = 'Не найдено';
             });
+
+        resultPinyin.textContent = '';
+        resultCard.classList.add('show');
     }
 
     searchBtn.addEventListener('click', function() { search(searchInput.value); });
